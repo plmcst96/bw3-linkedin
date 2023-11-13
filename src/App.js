@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Navbarl/>
       <Sidebar />
-      <Footer />
+      <Footer  />
       <Chatbox />
     </div>
   );

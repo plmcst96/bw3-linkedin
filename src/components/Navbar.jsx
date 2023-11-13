@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Navbarl() {
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 ">
       <Container className='d-flex align-items-center'>
         <Navbar.Brand href="#home"><img src="assets/174857.png" alt="" width="40" height="40" /></Navbar.Brand>
         <Search className='d-inline d-lg-none'/>
@@ -51,10 +51,15 @@ function Navbarl() {
               <Nav.Link href="#pricing"> <PersonCircle /> </Nav.Link>
               <span className='d-none d-md-inline'>Tu</span>
             </Col>
-         <Col>
+         <Col className='border-start'>
             
-            <Nav.Link href="#pricing"> <Grid3x3Gap/> </Nav.Link>
+            <Nav.Link href="#pricing" > <Grid3x3Gap/> </Nav.Link>
             <span className='d-none d-md-inline text-nowrap'>Per le aziende</span>
+        </Col>
+        <Col className='d-none d-xl-block' >
+            
+            <Nav.Link href="#pricing" >  
+            <span className='d-none d-md-inline text-nowrap text-decoration-underline'>Prova premium gratis</span></Nav.Link>
         </Col>
       </Row>
           </Nav>

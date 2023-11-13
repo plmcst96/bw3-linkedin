@@ -1,7 +1,7 @@
 import { PersonFillAdd } from "react-bootstrap-icons";
 
 
-const DiscoverUser = () => {
+const Corsi = () => {
 
   return ( <>
   <div className="d-flex align-items-center">
@@ -16,4 +16,4 @@ const DiscoverUser = () => {
   );
 };
 
-export default DiscoverUser;
+export default Corsi;
