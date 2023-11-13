@@ -1,4 +1,4 @@
-import { Button, Modal } from "react-bootstrap"
+import { Button, Modal } from 'react-bootstrap'
 
 const ModaleUserPut = ({ onHide }) => {
   return (
