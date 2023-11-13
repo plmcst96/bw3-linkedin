@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
-import { BellFill, Briefcase, ChatDots, Grid3x3, Grid3x3Gap, HouseAddFill, PeopleFill, PersonCircle } from 'react-bootstrap-icons';
+import { BellFill, Briefcase, ChatDots, Grid3x3Gap, HouseAddFill, PeopleFill, PersonCircle } from 'react-bootstrap-icons';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -51,7 +51,7 @@ function Navbarl() {
             <span>Tu</span>
             </Col>
          <Col>
-         <Grid3x3Gap className='fs-5 mt-2'/>
+            <Grid3x3Gap className='fs-5 mt-2'/>
             <NavDropdown title="Per le aziende"  id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
