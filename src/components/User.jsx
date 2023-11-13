@@ -73,14 +73,13 @@ const User = () => {
                     />
                   </div>
                   <div className="text-end me-5 fs-5">
-                    <Button
+                    <PencilFill
+                      onClick={() => setModalShow(true)}
                       style={{
                         cursor: "pointer",
                       }}
-                      onClick={() => setModalShow(true)}
-                    >
-                      <PencilFill />
-                    </Button>
+                    />
+
                     <ModaleUserPut
                       show={modalShow}
                       onHide={() => setModalShow(false)}
