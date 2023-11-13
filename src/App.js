@@ -1,10 +1,11 @@
 import './App.css'
-import User from './components/User'
+import Profile from './components/Profile'
+
 
 function App() {
   return (
     <>
-      <User />
+      <Profile />
     </>
   )
 }

@@ -37,7 +37,7 @@ const User = () => {
   }, [])
 
   return (
-    <Container className="mt-5">
+    <>
       <Row>
         <Col xs={12} sm={11} md={8}>
           <Row className="flex-column" style={{ height: "412px" }}>
@@ -108,8 +108,9 @@ const User = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         profile={userMe}
+        refresh={getUserMe}
       />
-    </Container>
+    </>
   )
 }
 

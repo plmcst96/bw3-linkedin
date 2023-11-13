@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 import { InfoSquareFill, Plus } from "react-bootstrap-icons"
 
-const ModaleUserPut = ({ onHide, show, profile }) => {
-  const [putProfile, setPutProfile] = useState({})
+const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
+  const [putProfile, setPutProfile] = useState({
+    ...profile,
+    name: profile.name,
+    surname: profile.surname,
+    title: profile.title,
+    area: profile.area,
+  })
 
   const putProf = async () => {
     const key =
@@ -32,10 +38,6 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
       console.log("errore", error)
     }
   }
-
-  useEffect(() => {
-    setPutProfile(profile)
-  }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -69,18 +71,26 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
             <Form.Label>Nome*</Form.Label>
             <Form.Control
               type="text"
-              value={putProfile.name}
+              name="name"
+              defaultValue={profile.name}
               onChange={handleInputChange}
               size="sm"
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Cognome*</Form.Label>
-            <Form.Control type="text" placeholder="Il tuo cognome" size="sm" />
+            <Form.Control
+              type="text"
+              name="surname"
+              defaultValue={profile.surname}
+              onChange={handleInputChange}
+              required
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Nome aggiuntivo</Form.Label>
-            <Form.Control type="text" size="sm" />
+            <Form.Control type="text" size="sm" disabled className="bg-white" />
           </Form.Group>
           <p style={{ fontSize: "14px" }} className="text-black-50">
             Pronuncia del nome
@@ -95,7 +105,7 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
             aria-describedby="genere"
           >
             <Form.Label>Inserisci pronomi personalizzati</Form.Label>
-            <Form.Control type="text" size="sm" />
+            <Form.Control type="text" size="sm" disabled className="bg-white" />
             <Form.Text id="genere" muted>
               Indica i pronomi di genere che vuoi che gli altri usino per
               riferirsi a te.
@@ -112,7 +122,13 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
           </p>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Sommario*</Form.Label>
-            <Form.Control type="text" placeholder="Marketing" size="sm" />
+            <Form.Control
+              type="text"
+              name="title"
+              defaultValue={profile.title}
+              onChange={handleInputChange}
+              required
+            />
           </Form.Group>
           <h5 className="fw-bold">Posizione attuale</h5>
           <Plus className="text-primary fs-3" />
@@ -121,7 +137,13 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
           </span>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Settore*</Form.Label>
-            <Form.Control type="text" placeholder="Marketing" size="sm" />
+            <Form.Control
+              type="text"
+              placeholder="Marketing"
+              size="sm"
+              disabled
+              className="bg-white"
+            />
           </Form.Group>
           <p>
             Scopri di più sulle{" "}
@@ -135,7 +157,13 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
           <h5 className="fw-bold">Formazione</h5>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Formazione*</Form.Label>
-            <Form.Control type="text" placeholder="Marketing" size="sm" />
+            <Form.Control
+              type="text"
+              placeholder="Marketing"
+              size="sm"
+              disabled
+              className="bg-white"
+            />
           </Form.Group>
           <Plus className="text-primary fs-3" />
           <span className="text-primary fs-6 fw-bold">
@@ -150,15 +178,32 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
           <h5 className="fw-bold">Località</h5>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Paese/Area geografica*</Form.Label>
-            <Form.Control type="text" placeholder="Marketing" size="sm" />
+            <Form.Control
+              type="text"
+              name="area"
+              defaultValue={profile.area}
+              onChange={handleInputChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>CAP</Form.Label>
-            <Form.Control type="text" placeholder="72014" size="sm" />
+            <Form.Control
+              type="text"
+              placeholder="72014"
+              size="sm"
+              disabled
+              className="bg-white"
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Città*</Form.Label>
-            <Form.Control type="text" placeholder="Cisternino" size="sm" />
+            <Form.Control
+              type="text"
+              placeholder="Cisternino"
+              size="sm"
+              disabled
+              className="bg-white"
+            />
           </Form.Group>
           <h5 className="fw-bold">Informazioni di contatto</h5>
           <p className="text-black-50 fw-bold">
@@ -170,7 +215,13 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={putProf} className="rounded-pill px-4">
+        <Button
+          onClick={() => {
+            putProf()
+            refresh()
+          }}
+          className="rounded-pill px-4"
+        >
           Salva
         </Button>
       </Modal.Footer>
