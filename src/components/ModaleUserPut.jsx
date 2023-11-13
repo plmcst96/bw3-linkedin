@@ -3,13 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap"
 import { InfoSquareFill, Plus } from "react-bootstrap-icons"
 
 const ModaleUserPut = ({ onHide, show, profile }) => {
-  const [putProfile, setPutProfile] = useState({
-    ...profile,
-    name: "",
-    surname: "",
-    title: "",
-    area: "",
-  })
+  const [putProfile, setPutProfile] = useState({})
 
   const putProf = async () => {
     const key =
@@ -20,7 +14,7 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
         "https://striveschool-api.herokuapp.com/api/profile/",
         {
           method: "PUT",
-
+          body: JSON.stringify(putProfile),
           headers: {
             Authorization: key,
             "Content-Type": "application/json",
@@ -40,8 +34,17 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
   }
 
   useEffect(() => {
-    putProf()
+    setPutProfile(profile)
   }, [])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+
+    setPutProfile((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
 
   return (
     <Modal
@@ -67,7 +70,7 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
             <Form.Control
               type="text"
               value={putProfile.name}
-              onChange={(e) => setPutProfile(e.target.value)}
+              onChange={handleInputChange}
               size="sm"
             />
           </Form.Group>
