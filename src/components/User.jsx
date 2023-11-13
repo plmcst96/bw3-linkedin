@@ -1,14 +1,48 @@
-import { Button, Col, Container, Row } from 'react-bootstrap'
-import { PenFill, Pencil, PencilFill } from 'react-bootstrap-icons'
+import { useEffect, useState } from "react"
+import { Button, Col, Container, Row } from "react-bootstrap"
+import { PencilFill } from "react-bootstrap-icons"
+import ModaleUserPut from "./ModaleUserPut"
 
 const User = () => {
+  const [userMe, setUserMe] = useState([])
+  const [modalShow, setModalShow] = useState(false)
+
+  const key =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdiN2M1NWU3ZTAwMThmODNjMTEiLCJpYXQiOjE2OTk4NzA2NDcsImV4cCI6MTcwMTA4MDI0N30.RSYpdD_NFfYv3NplWoFuFpBBjUPdLHi9DCtxJfDpnj8"
+
+  const getUserMe = async () => {
+    try {
+      const res = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        {
+          headers: {
+            Authorization: key,
+          },
+        }
+      )
+      if (res.ok) {
+        const data = await res.json()
+        console.log("eccoli", data)
+        setUserMe(data)
+      } else {
+        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
+      }
+    } catch (error) {
+      console.log("errore", error)
+    }
+  }
+
+  useEffect(() => {
+    getUserMe()
+  }, [])
+
   return (
     <Container className="mt-5">
       <Row>
-        <Col xs={12} sm={11} md={8} className="border">
-          <Row className="flex-column" style={{ height: '412px' }}>
+        <Col xs={12} sm={11} md={7}>
+          <Row className="flex-column" style={{ height: "412px" }}>
             <Col
-              style={{ minHeight: '201px', maxHeight: '201px' }}
+              style={{ minHeight: "201px", maxHeight: "201px" }}
               className="bg-dark rounded-top"
             >
               <img src="" alt="" />
@@ -18,32 +52,47 @@ const User = () => {
                 <Col xs={12}>
                   <div
                     style={{
-                      width: '160px',
-                      height: '160px',
-                      top: '-60%',
-                      borderRadius: '50%',
+                      width: "160px",
+                      height: "160px",
+                      top: "-60%",
+                      borderRadius: "50%",
                     }}
                     className="position-absolute bg-white"
                   >
                     <img
-                      src="https://placekitten.com/150"
+                      src={userMe.image}
                       alt=""
                       style={{
-                        position: 'absolute',
-                        top: '3.5%',
-                        left: '3%',
-                        borderRadius: '50%',
+                        position: "absolute",
+                        top: "3.5%",
+                        left: "3%",
+                        borderRadius: "50%",
+                        width: "150px",
+                        height: "150px",
                       }}
                     />
                   </div>
                   <div className="text-end me-5 fs-5">
-                    <Pencil style={{ cursor: 'pointer' }} />
+                    <Button
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setModalShow(true)}
+                    >
+                      <PencilFill />
+                    </Button>
+                    <ModaleUserPut
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
                   </div>
                 </Col>
                 <Col>
-                  <div className="fw-bold fs-3">Catalin Darii</div>
-                  <div className="fs-5">Studente diplomato presso: </div>
-                  <div className="text-muted">Spoleto, Umbria, Italia</div>
+                  <div className="fw-bold fs-3">
+                    {userMe.name} {userMe.surname}
+                  </div>
+                  <div className="fs-5">{userMe.title}</div>
+                  <div className="text-muted">{userMe.area}</div>
                 </Col>
                 <Col></Col>
                 <Col xs={12}>
