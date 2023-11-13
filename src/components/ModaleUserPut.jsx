@@ -5,6 +5,10 @@ import { InfoSquareFill, Plus } from "react-bootstrap-icons"
 const ModaleUserPut = ({ onHide, show, profile }) => {
   const [putProfile, setPutProfile] = useState({
     ...profile,
+    name: "",
+    surname: "",
+    title: "",
+    area: "",
   })
 
   const putProf = async () => {
@@ -63,12 +67,7 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
             <Form.Control
               type="text"
               value={putProfile.name}
-              onChange={(e) =>
-                setPutProfile({
-                  ...putProfile,
-                  [e.target.name]: e.target.value,
-                })
-              }
+              onChange={(e) => setPutProfile(e.target.value)}
               size="sm"
             />
           </Form.Group>
