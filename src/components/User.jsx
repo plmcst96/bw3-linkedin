@@ -2,39 +2,18 @@ import { useEffect, useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import { PencilFill, ThreeDots } from 'react-bootstrap-icons'
 import ModaleUserPut from './ModaleUserPut'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserMe } from '../redux/action'
 
 const User = () => {
-  const [userMe, setUserMe] = useState([])
   const [modalShow, setModalShow] = useState(false)
+  const userMe = useSelector((state) => state.user.userMe)
 
-  const key =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
-
-  const getUserMe = async () => {
-    try {
-      const res = await fetch(
-        'https://striveschool-api.herokuapp.com/api/profile/me',
-        {
-          headers: {
-            Authorization: key,
-          },
-        }
-      )
-      if (res.ok) {
-        const data = await res.json()
-        console.log('eccoli', data)
-        setUserMe(data)
-      } else {
-        throw new Error('Sei un ladro non puoi entrare nel mio profilo!')
-      }
-    } catch (error) {
-      console.log('errore', error)
-    }
-  }
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    getUserMe()
-  }, [])
+    dispatch(getUserMe())
+  }, [dispatch])
 
   return (
     <>
@@ -108,7 +87,6 @@ const User = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         profile={userMe}
-        refresh={getUserMe}
       />
     </>
   )
