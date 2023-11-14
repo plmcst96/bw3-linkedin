@@ -25,7 +25,6 @@ const AllUsers = () => {
       }, []);
   return (
     <Row className=" justify-content-center">
-  
     {userData.map((userList) => 
       <Col md={4} lg={2} className="mx-1 my-4">
         <Card className="h-100">

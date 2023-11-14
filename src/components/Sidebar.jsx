@@ -5,10 +5,13 @@ import Corsi from "./Corsi";
 import { useEffect, useState } from "react";
 const Sidebar = () => {
     const [userData, setUserData] = useState([]);
-    const randomUser1 = Math.floor(Math.random() * userData.length);
-    const randomUser2 = Math.floor(Math.random() * userData.length);
-    const randomUser3 = Math.floor(Math.random() * userData.length);
-    const randomUser4 = Math.floor(Math.random() * userData.length);
+  
+ 
+    const randomNum=[]
+    for(let i=0;i<4;i++)
+    {
+      randomNum[i]=Math.floor(Math.random()*userData.length)
+    }
 
     useEffect(() => {
         
@@ -58,10 +61,10 @@ const Sidebar = () => {
         <div className="rounded border  my-2 p-1 px-2"> 
             <p className="text-start m-2">Persone che potresti conoscere</p>
             
-            <DiscoverUser user={userData[randomUser1]} />
-            <DiscoverUser user={userData[randomUser2]} />
-            <DiscoverUser user={userData[randomUser3]} />
-            <DiscoverUser user={userData[randomUser4]} />
+            <DiscoverUser user={userData[randomNum[0]]} />
+            <DiscoverUser user={userData[randomNum[1]]} />
+            <DiscoverUser user={userData[randomNum[2]]} />
+            <DiscoverUser user={userData[randomNum[3]]} />
           
             <hr className="m-2" />
             <a href="/AllUsers" className="m-2 text-decoration-none text-secondary" style={{fontWeight:"600"}}>Mostra tutto</a>

@@ -2,13 +2,17 @@ import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Searchlist from './Search';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { BellFill, Briefcase, ChatDots, Grid3x3Gap, HouseAddFill, PeopleFill, PersonCircle, Search } from 'react-bootstrap-icons';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Navbarl() {
+  const [searchUs,setsearchUs]=useState("")
+
+
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 ">
       <Container className='d-flex align-items-center'>
@@ -16,12 +20,22 @@ function Navbarl() {
         <Search className='d-inline d-lg-none'/>
 
         <Form className="d-flex d-none d-lg-inline">
-            <Form.Control
+            <Form.Control onSubmit={(e)=>
+                    {
+                      e.preventDefault()
+                      (Searchlist(searchUs))
+                    }}
             
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={searchUs}
+              onChange={(e)=>
+                {
+                  e.preventDefault()
+                  setsearchUs(e.target.value)
+                }}
             />
            
           </Form>
