@@ -1,11 +1,11 @@
-import { Container } from 'react-bootstrap'
-import User from './User'
-import Consigliati from './Consigliati'
-import Risorse from './Risorse'
-import Activity from './Activity'
-import Interessi from './Interessi'
-import Student from './Student'
-import Experiences from './Experiences'
+import { Container } from "react-bootstrap";
+import User from "./User";
+import Consigliati from "./Consigliati";
+import Risorse from "./Risorse";
+import Activity from "./Activity";
+import Interessi from "./Interessi";
+import Student from "./Student";
+import Experiences from "./Experiences";
 
 const Profile = () => {
   return (
@@ -18,7 +18,7 @@ const Profile = () => {
       <Student />
       <Interessi />
     </Container>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
