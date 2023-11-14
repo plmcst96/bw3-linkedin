@@ -1,18 +1,24 @@
 
 import './App.css';
+import AllUsers from './components/AllUsers';
 import Chatbox from './components/Chat';
 import Footer from './components/Footer';
 import Navbarl from './components/Navbar';
 import Sidebar from './components/Sidebar';
-
+import { Route,Routes,BrowserRouter } from 'react-router-dom';
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
       <Navbarl/>
-      <Sidebar />
+      <Routes>
+      <Route element={<Sidebar/>} path='/' />
+      <Route element={<AllUsers/>} path='/AllUsers' />
+      </Routes>
       <Footer  />
       <Chatbox />
     </div>
+    </BrowserRouter>
   );
 }
 

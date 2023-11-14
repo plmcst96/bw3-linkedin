@@ -28,32 +28,32 @@ function Navbarl() {
         <Nav className="me-auto mx-3">
          <Row className='align-items-center'>
             <Col >
-              <Nav.Link href="#features "> <HouseAddFill /> 
+              <Nav.Link href="#features "> <HouseAddFill /> <br />
               <span className='d-none d-md-inline'>Home</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <PeopleFill /> 
+              <Nav.Link href="#pricing "> <PeopleFill /> <br />
               <span className='d-none d-md-inline'>Rete</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <Briefcase /> 
+              <Nav.Link href="#pricing "> <Briefcase /> <br />
               <span className='d-none d-md-inline'>Lavoro</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <ChatDots /> 
+              <Nav.Link href="#pricing "> <ChatDots /> <br />
               <span className='d-none d-md-inline'>Messaggistica</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <BellFill /> 
+              <Nav.Link href="#pricing "> <BellFill /> <br />
               <span className='d-none d-md-inline'>Notifiche</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <PersonCircle /> 
+              <Nav.Link href="#pricing "> <PersonCircle /> <br />
               <span className='d-none d-md-inline'>Tu</span></Nav.Link>
             </Col>
          <Col className='border-start'>
             
-            <Nav.Link href="#pricing " > <Grid3x3Gap/> 
+            <Nav.Link href="#pricing " > <Grid3x3Gap/> <br />
             <span className='d-none d-md-inline text-nowrap'>Per le aziende</span></Nav.Link>
         </Col>
         <Col className='d-none d-xl-block' >

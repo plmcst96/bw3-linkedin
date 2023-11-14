@@ -2,8 +2,30 @@ import { Row, Col, Container } from "react-bootstrap";
 import { Pencil } from "react-bootstrap-icons";
 import DiscoverUser from "./DiscoverUser";
 import Corsi from "./Corsi";
+import { useEffect, useState } from "react";
 const Sidebar = () => {
+    const [userData, setUserData] = useState([]);
+    const randomUser1 = Math.floor(Math.random() * userData.length);
+    const randomUser2 = Math.floor(Math.random() * userData.length);
+    const randomUser3 = Math.floor(Math.random() * userData.length);
+    const randomUser4 = Math.floor(Math.random() * userData.length);
 
+    useEffect(() => {
+        
+        fetch("https://striveschool-api.herokuapp.com/api/profile/", {
+          headers: {
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNTc0NWRkOTllZjAwMTlhMDkzM2UiLCJpYXQiOjE2OTk5NjA2NDUsImV4cCI6MTcwMTE3MDI0NX0.KD8qWCSi2X4Z56xRN9trMclgqG_Gifdc9M7JX20dqqQ",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`err`);
+            }
+            return response.json();
+          })
+          .then((data) => setUserData(data))
+          .catch((error) => console.error( error));
+      }, []);
   return (
    <Container>
     <Row g-3>
@@ -35,12 +57,14 @@ const Sidebar = () => {
 
         <div className="rounded border  my-2 p-1 px-2"> 
             <p className="text-start m-2">Persone che potresti conoscere</p>
-            <DiscoverUser />
-            <DiscoverUser />
-            <DiscoverUser />
-            <DiscoverUser />
+            
+            <DiscoverUser user={userData[randomUser1]} />
+            <DiscoverUser user={userData[randomUser2]} />
+            <DiscoverUser user={userData[randomUser3]} />
+            <DiscoverUser user={userData[randomUser4]} />
+          
             <hr className="m-2" />
-            <a href="/" className="m-2 text-decoration-none text-secondary" style={{fontWeight:"600"}}>Mostra tutto</a>
+            <a href="/AllUsers" className="m-2 text-decoration-none text-secondary" style={{fontWeight:"600"}}>Mostra tutto</a>
         </div>
           {/* second section */}
         {/* third section */}
