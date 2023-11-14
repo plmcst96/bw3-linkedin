@@ -24,25 +24,26 @@ const AllUsers = () => {
           .catch((error) => console.error( error));
       }, []);
   return (
-    <div className="d-flex flex-wrap">
-   
+    <Row className=" justify-content-center">
+  
     {userData.map((userList) => 
-    <div className="mx-2 my-4">
-        <Card style={{width:"18rem"}}>
-        <Card.Img variant="top" src={userList.image} />
-        <Card.Body>
+      <Col md={4} lg={2} className="mx-1 my-4">
+        <Card className="h-100">
+        <Card.Img className="h-50" variant="top" src={userList.image} />
+        <Card.Body className="d-flex flex-column justify-content-center">
+          <div className="d-flex flex-column justify-content-center flex-grow-1 ">
           <Card.Title>{userList.name} {userList.surname} </Card.Title>
           <Card.Text>
             {userList.title || "Web Developer"} 
-            
           </Card.Text>
+          </div>
           <Button variant="white" className="btn border border-2 border-black rounded-pill mb-2"><PersonFillAdd  className="me-2 pb-1"/> Collegati</Button>
         </Card.Body>
       </Card>
-      </div>
+      </Col>
          )  }
         
-    </div>
+    </Row>
     
   );
 };
