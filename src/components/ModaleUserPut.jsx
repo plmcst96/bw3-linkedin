@@ -14,34 +14,6 @@ const ModaleUserPut = ({ onHide, show, profile }) => {
   })
   const dispatch = useDispatch()
 
-  // const putProf = async () => {
-  //   const key =
-  //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
-
-  //   try {
-  //     const res = await fetch(
-  //       'https://striveschool-api.herokuapp.com/api/profile/',
-  //       {
-  //         method: 'PUT',
-  //         body: JSON.stringify(putProfile),
-  //         headers: {
-  //           Authorization: key,
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     )
-  //     if (res.ok) {
-  //       const data = await res.json()
-  //       console.log('tie', data)
-  //       onHide()
-  //     } else {
-  //       throw new Error('ce la puoi fare')
-  //     }
-  //   } catch (error) {
-  //     console.log('errore', error)
-  //   }
-  // }
-
   const handleInputChange = (e) => {
     const { name, value } = e.target
 

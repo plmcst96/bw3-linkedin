@@ -1,22 +1,19 @@
-import { useEffect, useState } from 'react'
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
-import { Plus } from 'react-bootstrap-icons'
+import { useState } from "react"
+import { Button, Col, Form, Modal, Row } from "react-bootstrap"
+import { Plus } from "react-bootstrap-icons"
 
-const ModaleExperiences = ({ onHide, show, experience, id }) => {
+const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
   const [isChecked, setChecked] = useState(false)
   const [isValid, setIsValid] = useState(false)
   const [postExperience, setPostExperience] = useState({
     ...experience,
     role: experience.role,
     company: experience.company,
-    startDate: experience.startDate,
-    endDate: experience.endDate,
+    startDate: "2023-08-11",
+    endDate: "2023-10-10" || null,
     description: experience.description,
     area: experience.area,
   })
-
-  console.log(experience)
-  console.log(id)
 
   const handelCheckChange = () => {
     setIsValid(!isValid)
@@ -35,30 +32,58 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
     }))
   }
   const key =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
 
   const postExperiences = async () => {
     try {
       const res = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`,
         {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(postExperience),
+
           headers: {
             Authorization: key,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       )
-
+      console.log(postExperience)
       if (res.ok) {
         const data = await res.json()
         console.log(data)
+        onHide()
       } else {
-        throw new Error('Sei un ladro non puoi entrare nel mio profilo!')
+        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
       }
     } catch (error) {
-      console.log('errore', error)
+      console.log("errore", error)
+    }
+  }
+
+  const putExperience = async () => {
+    try {
+      const res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${idEx}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(postExperience),
+
+          headers: {
+            Authorization: key,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      if (res.ok) {
+        const data = await res.json()
+        console.log(data)
+        onHide()
+      } else {
+        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
+      }
+    } catch (error) {
+      console.log("errore", error)
     }
   }
 
@@ -79,36 +104,36 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
       <Modal.Body className="p-0">
         <div
           className="d-flex align-items-center p-3"
-          style={{ background: '#EDF3F8' }}
+          style={{ background: "#EDF3F8" }}
         >
           <div>
             <p className="fw-bold mb-0">Informa la rete</p>
-            <p style={{ fontSize: '15px' }}>
+            <p style={{ fontSize: "15px" }}>
               Attiva l’opzione per informare la tua rete delle principali
               modifiche al profilo (ad esempio un nuovo lavoro) e degli
               anniversari lavorativi. Gli aggiornamenti possono richiedere fino
-              a 2 ore. Scopri di più sulla{' '}
+              a 2 ore. Scopri di più sulla{" "}
               <strong className="text-primary">
-                {' '}
+                {" "}
                 condivisione delle modifiche del profilo
               </strong>
               .
             </p>
           </div>
           <div className="ms-3">
-            {' '}
+            {" "}
             <Form.Check // prettier-ignore
               type="switch"
               id="custom-switch"
               className="fs-2"
-              label={isChecked ? 'si' : 'no'}
+              label={isChecked ? "si" : "no"}
               onChange={handleSwitchChange}
               checked={isChecked}
             />
           </div>
         </div>
         <div className="p-3">
-          <span style={{ fontSize: '12px' }} className="text-black-50">
+          <span style={{ fontSize: "12px" }} className="text-black-50">
             *indica che è obbligatorio
           </span>
           <Form>
@@ -120,6 +145,7 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
                 placerholer="Esempio: Front-End Developer"
                 required
                 name="role"
+                defaultValue={experience.role}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -138,7 +164,7 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
               </Form.Select>
             </Form.Group>
             <p>
-              Scopri di più sui{' '}
+              Scopri di più sui{" "}
               <strong className="text-primary">tipi di impiego</strong>.
             </p>
             <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -148,6 +174,8 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
                 size="sm"
                 placeholder="Epicode"
                 required
+                name="company"
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -157,6 +185,8 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
                 size="sm"
                 placeholder="Esempio: Roma, Italia"
                 required
+                name="area"
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -179,24 +209,29 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
               <span className="ms-2">Attualmente ricopro questo ruolo</span>
             </div>
             <Row>
-              <span style={{ fontSize: '14px' }} className="text-black-50 mb-1">
+              <span style={{ fontSize: "14px" }} className="text-black-50 mb-1">
                 Data di inizio*
               </span>
               <Col>
-                <Form.Select required aria-label="Default select example">
+                <Form.Select
+                  required
+                  aria-label="Default select example"
+                  name="startDate"
+                  onChange={handleInputChange}
+                >
                   <option>Mese</option>
-                  <option>Gennaio</option>
-                  <option>Febbraio</option>
-                  <option>Marzo</option>
-                  <option>Aprile</option>
-                  <option>Maggio</option>
-                  <option>Giugno</option>
-                  <option>Luglio</option>
-                  <option>Agosto</option>
-                  <option>Settembre</option>
-                  <option>Ottobre</option>
-                  <option>Novembre</option>
-                  <option>Dicembre</option>
+                  <option value="01">Gennaio</option>
+                  <option value="02">Febbraio</option>
+                  <option value="03">Marzo</option>
+                  <option value="04">Aprile</option>
+                  <option value="05">Maggio</option>
+                  <option value="06">Giugno</option>
+                  <option value="07">Luglio</option>
+                  <option value="08">Agosto</option>
+                  <option value="09">Settembre</option>
+                  <option value="10">Ottobre</option>
+                  <option value="11">Novembre</option>
+                  <option value="12">Dicembre</option>
                 </Form.Select>
               </Col>
               <Col>
@@ -220,7 +255,7 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
 
             <Row>
               <span
-                style={{ fontSize: '14px' }}
+                style={{ fontSize: "14px" }}
                 className="text-black-50 mb-1 mt-4"
               >
                 Data di fine*
@@ -230,6 +265,8 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
                   required
                   disabled={isValid}
                   aria-label="Default select example"
+                  name="endDate"
+                  onChange={handleInputChange}
                 >
                   <option>Mese</option>
                   <option>Gennaio</option>
@@ -268,7 +305,7 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
                 </Form.Select>
               </Col>
             </Row>
-            <div className={isValid ? 'd-none' : 'd-block'}>
+            <div className={isValid ? "d-none" : "d-block"}>
               <div className="d-flex align-items-center mt-4">
                 <Form.Check name="group2" className="fs-3" />
                 <span className="ms-2">
@@ -290,10 +327,10 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
                 segnalazioni più pertinenti
               </Form.Text>
               <p className="mt-1">
-                Scopri di più sulle{' '}
+                Scopri di più sulle{" "}
                 <a
                   href="https://www.linkedin.com/help/linkedin/answer/a720019"
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: "none" }}
                 >
                   <strong>opzioni relative al settore</strong>
                 </a>
@@ -304,7 +341,12 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Descrizione</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="description"
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <div className={isValid ? `d-none` : `d-block`}>
               <Form.Group className="mb-1 mt-3" controlId="formGroupPassword">
@@ -336,7 +378,7 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
               <h5 className="fw-bold">Meida</h5>
               <p>
                 Aggiungi contenuti multimediali come immagini, documenti, siti o
-                presentazioni. Scopri di più sui{' '}
+                presentazioni. Scopri di più sui{" "}
                 <strong className="text-primary">
                   tipi di file multimediali supportati
                 </strong>
@@ -352,7 +394,12 @@ const ModaleExperiences = ({ onHide, show, experience, id }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button className="rounded-pill px-4" onClick={() => postExperiences()}>
+        <Button
+          className="rounded-pill px-4"
+          onClick={() => {
+            postExperiences()
+          }}
+        >
           Salva
         </Button>
       </Modal.Footer>
