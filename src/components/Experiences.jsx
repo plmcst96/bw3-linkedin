@@ -1,22 +1,29 @@
-import { Col, Row, Dropdown } from "react-bootstrap"
+import { Col, Row, Dropdown } from 'react-bootstrap'
 import {
   BriefcaseFill,
   CalendarDate,
   PencilFill,
   Plus,
-} from "react-bootstrap-icons"
-import img from "../assets/Logo_Università_Padova.svg.png"
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import ModaleExperiences from "./ModaleExperiences"
+} from 'react-bootstrap-icons'
+import img from '../assets/Logo_Università_Padova.svg.png'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import ModaleExperiences from './ModaleExperiences'
 
 const Experiences = () => {
-  const [experience, setExperience] = useState()
+  const [experience, setExperience] = useState({
+    role: '',
+    company: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+    area: '',
+  })
   const user = useSelector((state) => state.user.userMe)
   const [modalShow, setModalShow] = useState(false)
 
   const key =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
+    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
 
   const getExperiences = async () => {
     try {
@@ -35,10 +42,10 @@ const Experiences = () => {
         setExperience(data)
         console.log(data)
       } else {
-        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
+        throw new Error('Sei un ladro non puoi entrare nel mio profilo!')
       }
     } catch (error) {
-      console.log("errore", error)
+      console.log('errore', error)
     }
   }
 
@@ -55,7 +62,7 @@ const Experiences = () => {
           <Col>
             <h5 className="fw-bold">Esperienze</h5>
             <div>
-              <img src={img} alt="" style={{ width: "50px" }} />
+              <img src={img} alt="" style={{ width: '50px' }} />
               <span className="fw-bold ms-3">
                 Università degli studi di Padova
               </span>
@@ -72,7 +79,7 @@ const Experiences = () => {
                   href="#/action-1"
                   onClick={() => setModalShow(true)}
                 >
-                  <BriefcaseFill /> Aggiungi posizione lavorativa{" "}
+                  <BriefcaseFill /> Aggiungi posizione lavorativa{' '}
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-2">
                   <CalendarDate /> Aggiungi pausa lavorativa
@@ -86,7 +93,8 @@ const Experiences = () => {
       <ModaleExperiences
         show={modalShow}
         onHide={() => setModalShow(false)}
-        profile={experience}
+        experience={experience}
+        id={user._id}
       />
     </Row>
   )
