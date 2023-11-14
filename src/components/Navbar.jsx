@@ -28,37 +28,37 @@ function Navbarl() {
         <Nav className="me-auto mx-3">
          <Row className='align-items-center'>
             <Col >
-              <Nav.Link href="#features"> <HouseAddFill /> </Nav.Link>
-              <span className='d-none d-md-inline'>Home</span>
+              <Nav.Link href="#features "> <HouseAddFill /> 
+              <span className='d-none d-md-inline'>Home</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing"> <PeopleFill /> </Nav.Link>
-              <span className='d-none d-md-inline'>Rete</span>
+              <Nav.Link href="#pricing "> <PeopleFill /> 
+              <span className='d-none d-md-inline'>Rete</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing"> <Briefcase /> </Nav.Link>
-              <span className='d-none d-md-inline'>Lavoro</span>
+              <Nav.Link href="#pricing "> <Briefcase /> 
+              <span className='d-none d-md-inline'>Lavoro</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing"> <ChatDots /> </Nav.Link>
-              <span className='d-none d-md-inline'>Messaggistica</span>
+              <Nav.Link href="#pricing "> <ChatDots /> 
+              <span className='d-none d-md-inline'>Messaggistica</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing"> <BellFill /> </Nav.Link>
-              <span className='d-none d-md-inline'>Notifiche</span>
+              <Nav.Link href="#pricing "> <BellFill /> 
+              <span className='d-none d-md-inline'>Notifiche</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing"> <PersonCircle /> </Nav.Link>
-              <span className='d-none d-md-inline'>Tu</span>
+              <Nav.Link href="#pricing "> <PersonCircle /> 
+              <span className='d-none d-md-inline'>Tu</span></Nav.Link>
             </Col>
          <Col className='border-start'>
             
-            <Nav.Link href="#pricing" > <Grid3x3Gap/> </Nav.Link>
-            <span className='d-none d-md-inline text-nowrap'>Per le aziende</span>
+            <Nav.Link href="#pricing " > <Grid3x3Gap/> 
+            <span className='d-none d-md-inline text-nowrap'>Per le aziende</span></Nav.Link>
         </Col>
         <Col className='d-none d-xl-block' >
             
-            <Nav.Link href="#pricing" >  
+            <Nav.Link href="#pricing " >  
             <span className='d-none d-md-inline text-nowrap text-decoration-underline'>Prova premium gratis</span></Nav.Link>
         </Col>
       </Row>

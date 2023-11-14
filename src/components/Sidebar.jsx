@@ -11,19 +11,19 @@ const Sidebar = () => {
         <div><h1>Ciao</h1></div></Col>
         {/* first section */}
         <Col className="col-md-4 "> 
-        <div className="rounded border border-black border-1 my-2 p-1"> 
+        <div className="rounded border  my-2 p-1"> 
         <div className="d-flex justify-content-between  p-3">
             <div className=" text-start me-2" >
-                 <p style={{fontSize:"1.6vw", fontWeight:"700", margin:"0"}}>Lingua del profilo</p>
-                 <p className="m-0" style={{fontSize:"1.3vw"}}>www.linkedin.com/in/...</p>
+                 <p style={{fontSize:"1.2vw", fontWeight:"700", margin:"0"}}>Lingua del profilo</p>
+                 <p className="m-0" style={{fontSize:"0.8vw"}}>www.linkedin.com/in/...</p>
             </div>
             <Pencil  />
         </div>
         <hr  className="m-0"/>
         <div className="d-flex justify-content-between  p-3">
             <div className=" text-start me-2" >
-                 <p style={{fontSize:"1.6vw", fontWeight:"700", margin:"0"}}>Public profile & URL</p>
-                 <p className="m-0" style={{fontSize:"1.3vw"}}>Italiano</p>
+                 <p style={{fontSize:"1.2vw", fontWeight:"700", margin:"0"}}>Public profile & URL</p>
+                 <p className="m-0" style={{fontSize:"0.8vw"}}>Italiano</p>
             </div>
             <Pencil  />
         </div>
@@ -33,8 +33,8 @@ const Sidebar = () => {
 
         {/* second section */}
 
-        <div className="rounded border border-black border-1 my-2 p-1 px-2"> 
-            <p>Persone che potresti conoscere</p>
+        <div className="rounded border  my-2 p-1 px-2"> 
+            <p className="text-start m-2">Persone che potresti conoscere</p>
             <DiscoverUser />
             <DiscoverUser />
             <DiscoverUser />
@@ -44,7 +44,7 @@ const Sidebar = () => {
         </div>
           {/* second section */}
         {/* third section */}
-        <div className="rounded border border-black border-1 my-2 p-1 px-2"> 
+        <div className="rounded border  my-2 p-1 px-2"> 
             <div className="d-flex p-2 align-items-center">
                 <img src="assets/174857.png" alt="linkedIn" width={20} height={20} className="me-1" />
                 <p className="m-0">LEARNING</p>
