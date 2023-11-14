@@ -1,5 +1,10 @@
-import { Col, Row } from "react-bootstrap";
-import { PencilFill, Plus } from "react-bootstrap-icons";
+import { Col, Row, Dropdown } from "react-bootstrap";
+import {
+  BriefcaseFill,
+  CalendarDate,
+  PencilFill,
+  Plus,
+} from "react-bootstrap-icons";
 import img from "../assets/Logo_Università_Padova.svg.png";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,6 +12,7 @@ import { useSelector } from "react-redux";
 const Experiences = () => {
   const [experience, setExperience] = useState();
   const user = useSelector((state) => state.user.userMe);
+  const [modalShow, setModalShow] = useState(false);
 
   const key =
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws";
@@ -14,7 +20,7 @@ const Experiences = () => {
   const getExperiences = async () => {
     try {
       const res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/:${user._id}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${user._id}/experiences `,
         {
           headers: {
             Authorization: key,
@@ -24,9 +30,9 @@ const Experiences = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log("mio", data);
+        // console.log("mio", data);
         setExperience(data);
-        console.log(user);
+        console.log(data);
       } else {
         throw new Error("Sei un ladro non puoi entrare nel mio profilo!");
       }
@@ -36,8 +42,10 @@ const Experiences = () => {
   };
 
   useEffect(() => {
-    getExperiences();
-  }, []);
+    if (user.length !== 0) {
+      getExperiences();
+    }
+  }, [user]);
 
   return (
     <Row>
@@ -53,7 +61,23 @@ const Experiences = () => {
             </div>
           </Col>
           <Col className="d-flex justify-content-end align-items-center h-25">
-            <Plus className="fs-1 me-3 " />
+            <Dropdown align="end">
+              <Dropdown.Toggle split id="dropdown-split-basic">
+                <Plus className="fs-1 me-3 " />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu className="end">
+                <Dropdown.Item
+                  href="#/action-1"
+                  onClick={() => setModalShow(true)}
+                >
+                  <BriefcaseFill /> Aggiungi posizione lavorativa{" "}
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-2">
+                  <CalendarDate /> Aggiungi pausa lavorativa
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             <PencilFill className="fs-5 " />
           </Col>
         </Row>
