@@ -1,6 +1,6 @@
-import { Col, Row } from 'react-bootstrap'
-import { PencilFill, Plus } from 'react-bootstrap-icons'
-import img from '../assets/Logo_Università_Padova.svg.png'
+import { Col, Row } from "react-bootstrap"
+import { PencilFill, Plus } from "react-bootstrap-icons"
+import img from "../assets/Logo_Università_Padova.svg.png"
 
 const Student = () => {
   return (
@@ -10,8 +10,8 @@ const Student = () => {
           <Col>
             <h5 className="fw-bold">Formazione</h5>
             <div>
-              <img src={img} alt="" style={{ width: '50px' }} />
-              <span className="fw-bold ms-3">
+              <img src={img} alt="" style={{ width: "50px" }} />
+              <span className="fw-bold ms-3 text-nowrap">
                 Università degli studi di Padova
               </span>
             </div>

@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap'
-import { InfoSquareFill, Plus } from 'react-bootstrap-icons'
+import { useState } from "react"
+import { Button, Form, Modal } from "react-bootstrap"
+import { InfoSquareFill, Plus } from "react-bootstrap-icons"
+import { useDispatch } from "react-redux"
+import { putProf } from "../redux/action"
 
 const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
   const [putProfile, setPutProfile] = useState({
@@ -10,34 +12,35 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
     title: profile.title,
     area: profile.area,
   })
+  const dispatch = useDispatch()
 
-  const putProf = async () => {
-    const key =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
+  // const putProf = async () => {
+  //   const key =
+  //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
 
-    try {
-      const res = await fetch(
-        'https://striveschool-api.herokuapp.com/api/profile/',
-        {
-          method: 'PUT',
-          body: JSON.stringify(putProfile),
-          headers: {
-            Authorization: key,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-      if (res.ok) {
-        const data = await res.json()
-        console.log('tie', data)
-        onHide()
-      } else {
-        throw new Error('ce la puoi fare')
-      }
-    } catch (error) {
-      console.log('errore', error)
-    }
-  }
+  //   try {
+  //     const res = await fetch(
+  //       'https://striveschool-api.herokuapp.com/api/profile/',
+  //       {
+  //         method: 'PUT',
+  //         body: JSON.stringify(putProfile),
+  //         headers: {
+  //           Authorization: key,
+  //           'Content-Type': 'application/json',
+  //         },
+  //       }
+  //     )
+  //     if (res.ok) {
+  //       const data = await res.json()
+  //       console.log('tie', data)
+  //       onHide()
+  //     } else {
+  //       throw new Error('ce la puoi fare')
+  //     }
+  //   } catch (error) {
+  //     console.log('errore', error)
+  //   }
+  // }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -63,7 +66,7 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <span style={{ fontSize: '12px' }} className="text-black-50">
+        <span style={{ fontSize: "12px" }} className="text-black-50">
           *indica che è obbligatorio
         </span>
         <Form>
@@ -92,11 +95,11 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
             <Form.Label>Nome aggiuntivo</Form.Label>
             <Form.Control type="text" size="sm" disabled className="bg-white" />
           </Form.Group>
-          <p style={{ fontSize: '14px' }} className="text-black-50">
+          <p style={{ fontSize: "14px" }} className="text-black-50">
             Pronuncia del nome
           </p>
           <InfoSquareFill className="text-black-50" />
-          <span className="ms-2 text-black-50" style={{ fontSize: '14px' }}>
+          <span className="ms-2 text-black-50" style={{ fontSize: "14px" }}>
             Può essere aggiunta solo usando la nostra app per dispositivi mobili
           </span>
           <Form.Group
@@ -112,10 +115,10 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
             </Form.Text>
           </Form.Group>
           <p>
-            Scopri di più sui{' '}
+            Scopri di più sui{" "}
             <a
               href="https://www.linkedin.com/help/linkedin/answer/a569520"
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               <strong>pronomi di genere</strong>
             </a>
@@ -146,10 +149,10 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
             />
           </Form.Group>
           <p>
-            Scopri di più sulle{' '}
+            Scopri di più sulle{" "}
             <a
               href="https://www.linkedin.com/help/linkedin/answer/a720019"
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               <strong>opzioni relative al settore</strong>
             </a>
@@ -170,7 +173,7 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
             Aggiungi un nuovo grado di formazione
           </span>
           <div className="d-flex align-items-center">
-            <Form.Check name="group1" className="fs-3" />{' '}
+            <Form.Check name="group1" className="fs-3" />{" "}
             <span className="ms-2">
               Mostra la formazione nella mia presentazione
             </span>
@@ -217,8 +220,7 @@ const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
       <Modal.Footer>
         <Button
           onClick={() => {
-            putProf()
-            refresh()
+            dispatch(putProf(putProfile, onHide))
           }}
           className="rounded-pill px-4"
         >
