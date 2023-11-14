@@ -1,21 +1,22 @@
-import { Col, Row, Dropdown } from "react-bootstrap";
+import { Col, Row, Dropdown } from "react-bootstrap"
 import {
   BriefcaseFill,
   CalendarDate,
   PencilFill,
   Plus,
-} from "react-bootstrap-icons";
-import img from "../assets/Logo_Università_Padova.svg.png";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+} from "react-bootstrap-icons"
+import img from "../assets/Logo_Università_Padova.svg.png"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import ModaleExperiences from "./ModaleExperiences"
 
 const Experiences = () => {
-  const [experience, setExperience] = useState();
-  const user = useSelector((state) => state.user.userMe);
-  const [modalShow, setModalShow] = useState(false);
+  const [experience, setExperience] = useState()
+  const user = useSelector((state) => state.user.userMe)
+  const [modalShow, setModalShow] = useState(false)
 
   const key =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
 
   const getExperiences = async () => {
     try {
@@ -26,26 +27,26 @@ const Experiences = () => {
             Authorization: key,
           },
         }
-      );
+      )
 
       if (res.ok) {
-        const data = await res.json();
+        const data = await res.json()
         // console.log("mio", data);
-        setExperience(data);
-        console.log(data);
+        setExperience(data)
+        console.log(data)
       } else {
-        throw new Error("Sei un ladro non puoi entrare nel mio profilo!");
+        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
       }
     } catch (error) {
-      console.log("errore", error);
+      console.log("errore", error)
     }
-  };
+  }
 
   useEffect(() => {
     if (user.length !== 0) {
-      getExperiences();
+      getExperiences()
     }
-  }, [user]);
+  }, [user])
 
   return (
     <Row>
@@ -62,8 +63,8 @@ const Experiences = () => {
           </Col>
           <Col className="d-flex justify-content-end align-items-center h-25">
             <Dropdown align="end">
-              <Dropdown.Toggle split id="dropdown-split-basic">
-                <Plus className="fs-1 me-3 " />
+              <Dropdown.Toggle id="dropdownMenuicon">
+                <Plus className="fs-1 me-3 text-black" />
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="end">
@@ -82,8 +83,13 @@ const Experiences = () => {
           </Col>
         </Row>
       </Col>
+      <ModaleExperiences
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        profile={experience}
+      />
     </Row>
-  );
-};
+  )
+}
 
-export default Experiences;
+export default Experiences

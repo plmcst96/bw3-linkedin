@@ -6,3 +6,8 @@
 .progress-bar {
   background-color: #56687a !important;
 }
+
+.dropdown-toggle {
+  background-color: white !important;
+  border: none !important;
+}

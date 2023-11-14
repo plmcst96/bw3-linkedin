@@ -4,7 +4,7 @@ import { InfoSquareFill, Plus } from "react-bootstrap-icons"
 import { useDispatch } from "react-redux"
 import { putProf } from "../redux/action"
 
-const ModaleUserPut = ({ onHide, show, profile, refresh }) => {
+const ModaleUserPut = ({ onHide, show, profile }) => {
   const [putProfile, setPutProfile] = useState({
     ...profile,
     name: profile.name,
