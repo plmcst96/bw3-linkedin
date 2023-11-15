@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
-import { Button, Col, Row } from 'react-bootstrap'
-import { PencilFill, ThreeDots } from 'react-bootstrap-icons'
-import ModaleUserPut from './ModaleUserPut'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserMe } from '../redux/action'
+import { useEffect, useState } from "react"
+import { Button, Col, Row } from "react-bootstrap"
+import { PencilFill, ThreeDots } from "react-bootstrap-icons"
+import ModaleUserPut from "./ModaleUserPut"
+import { useDispatch, useSelector } from "react-redux"
+import { getUserMe } from "../redux/action"
+
+import ImageProfile from "./ImageProfile"
 
 const User = () => {
   const [modalShow, setModalShow] = useState(false)
+  const [imageModal, setImageModal] = useState(false)
   const userMe = useSelector((state) => state.user.userMe)
 
   const dispatch = useDispatch()
@@ -19,9 +22,9 @@ const User = () => {
     <>
       <Row>
         <Col xs={12} sm={11} md={8}>
-          <Row className="flex-column" style={{ height: '412px' }}>
+          <Row className="flex-column" style={{ height: "412px" }}>
             <Col
-              style={{ minHeight: '201px', maxHeight: '201px' }}
+              style={{ minHeight: "201px", maxHeight: "201px" }}
               className="bg-dark rounded-top"
             >
               <img src="" alt="" />
@@ -31,10 +34,10 @@ const User = () => {
                 <Col xs={12}>
                   <div
                     style={{
-                      width: '160px',
-                      height: '160px',
-                      top: '-60%',
-                      borderRadius: '50%',
+                      width: "160px",
+                      height: "160px",
+                      top: "-60%",
+                      borderRadius: "50%",
                     }}
                     className="position-absolute bg-white"
                   >
@@ -42,19 +45,20 @@ const User = () => {
                       src={userMe.image}
                       alt=""
                       style={{
-                        position: 'absolute',
-                        top: '3.5%',
-                        left: '3%',
-                        borderRadius: '50%',
-                        width: '150px',
-                        height: '150px',
+                        position: "absolute",
+                        top: "3.5%",
+                        left: "3%",
+                        borderRadius: "50%",
+                        width: "150px",
+                        height: "150px",
                       }}
+                      onClick={() => setImageModal(true)}
                     />
                   </div>
                   <div className="text-end fs-5">
                     <PencilFill
                       onClick={() => setModalShow(true)}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: "pointer" }}
                     />
                   </div>
                 </Col>
@@ -86,6 +90,11 @@ const User = () => {
       <ModaleUserPut
         show={modalShow}
         onHide={() => setModalShow(false)}
+        profile={userMe}
+      />
+      <ImageProfile
+        show={imageModal}
+        onHide={() => setImageModal(false)}
         profile={userMe}
       />
     </>

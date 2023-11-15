@@ -11,3 +11,9 @@
   background-color: white !important;
   border: none !important;
 }
+
+@media screen and (min-width: 992px) {
+  .peppa {
+    left: 30% !important;
+  }
+}
