@@ -12,10 +12,8 @@
   border: none !important;
 }
 
-@media screen and (min-width: 992px) {
-  .peppa {
-    left: 30% !important;
-  }
+.peppa {
+  transform: translate(-50%, -100%);
 }
 
 .box {
