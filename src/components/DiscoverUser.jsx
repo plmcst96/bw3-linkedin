@@ -8,8 +8,8 @@ const DiscoverUser = ({user}) => {
   console.log(user);
   return ( <>
   <div className="d-flex align-items-center ">
-    <img src={user.image} alt=""  width={50} className="rounded-circle m-2"/>
-    <div>
+    <img src={user.image} alt=""  width={50} height={50} className="rounded-circle m-2"/>
+    <div className="mx-3">
         <p className="m-0"><strong>{user.name  || "404 Nome non trovato"} {user.surname}</strong></p>
         
         <p className="mb-0"> {user.title}</p>

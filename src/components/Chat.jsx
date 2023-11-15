@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ChatUser from './ChatUser';
+import "../chat.css"
 
 const Chatbox = () => {
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
-  const [isOffline, setisOffline] = useState(false); 
-  const [peopleList, setPeopleList] = useState([
-    'Person 1',
-    'Person 2',
-    'Person 3',
-  ]);
+  const [isOffline, setIsOffline] = useState(false); 
+  const [showChat, setShowChat] = useState(false);
   const [userData, setUserData] = useState([]);
   useEffect(() => {
         
@@ -30,22 +27,58 @@ const Chatbox = () => {
   const toggleChatbox = () => {
     setIsChatboxOpen(!isChatboxOpen);
     if (isChatboxOpen) {
-      setisOffline(!isOffline);
+      setIsOffline(!isOffline);
     }
   };
 
   return (
-    <div className= {`border d-none d-sm-block z-2 bg-white  chatbox ${isChatboxOpen ? 'open' : ''}`} style={{width:"300px", position:"sticky", bottom:"0vh",left:"80vw", cursor: isChatboxOpen ? '' : 'pointer'  }}>
-      <div className="chatbox-header d-flex justify-content-around align-items-center" onClick={toggleChatbox} style={{backgroundColor: isChatboxOpen ? '#0e76a8' : ''  }}>
-        <p className='m-1 ' style={{cursor: isChatboxOpen ? 'pointer' : '', fontSize:"1.2vw" , fontWeight:"400", color: isChatboxOpen ? "white" : "black" }}>Messaggi</p>
-        <div className='rounded-circle' style={{ width: "10px", height: "10px", backgroundColor: isOffline ? '#f38071' : '#7df36e', cursor: isChatboxOpen ? 'pointer' : ''}}></div>
+     <div
+      onClick={() => setShowChat(!showChat)}
+      className={`border d-none d-sm-block bg-white chatbox ${isChatboxOpen ? 'open slide-in' : ''}`}
+      style={{
+        width: '300px',
+        zIndex: '1000',
+        position: 'sticky',
+        bottom: '0vh',
+        left: '70vw',
+        cursor: isChatboxOpen ? '' : 'pointer',
+      }}
+    >
+     <div
+        className="chatbox-header d-flex justify-content-around align-items-center "
+        onClick={toggleChatbox}
+        style={{
+          backgroundColor: isChatboxOpen ? '#0e76a8' : '',
+        }}
+      >
+        <p
+          className="m-1 flex-grow-1 text-start ms-2"
+          style={{
+            cursor: isChatboxOpen ? 'pointer' : '',
+            fontSize: '1vw',
+            fontWeight: '400',
+            color: isChatboxOpen ? 'white' : 'black',
+          }}> Messaggi </p>
+       
+        <div
+          className="rounded-circle p-2 me-4"
+          style={{
+            width: '10px',
+            height: '10px',
+            backgroundColor: isOffline ? '#f38071' : '#7df36e',
+            cursor: isChatboxOpen ? 'pointer' : '',
+          }}
+        ></div>
       </div>
-      <div className="chatbox-content" style={{ maxHeight: "350px",  overflowY: "auto"}}>
+      <div
+        className="chatbox-content"
+        style={{ maxHeight: '350px', overflowY: 'auto' }}
+      >
         {isChatboxOpen && (
-          <div className='ps-2 text-start pb-5'>
-          {userData.map((person, index) => (
-                <ChatUser key={index} person={person} />
-              ))}
+          <div className="ps-2 text-start pb-3 mt-2">
+            {userData.map((person, index) => (
+              <ChatUser key={index} person={person} />
+            ))}
           </div>
         )}
       </div>
@@ -54,5 +87,3 @@ const Chatbox = () => {
 };
 
 export default Chatbox;
-
-   

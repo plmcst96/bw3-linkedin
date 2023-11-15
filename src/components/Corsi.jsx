@@ -6,7 +6,7 @@ const Corsi = () => {
   return ( <>
   <div className="d-flex align-items-center my-1">
     <iframe width="80" height="60" className="rounded"
-     src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=Umvkzme1zxDFbtyO" 
+   src="https://www.dailymotion.com/embed/video/x3fas4j?autoplay=1"
      title="YouTube video player" frameborder="0" 
       
       allowfullscreen>
@@ -17,18 +17,18 @@ const Corsi = () => {
          </div>
   </div>
   <div className="d-flex align-items-center my-1">
-  <iframe width="80" height="60" src="https://www.youtube.com/embed/I-jdIspch8w?si=wz6rZRrETf_VBOO6" 
+  <iframe width="80" height="60" src="https://www.dailymotion.com/embed/video/x8e6baj?autoplay=1"
   title="YouTube video player" frameborder="0" 
 
   allowfullscreen></iframe>
     <div className="mx-2 text-start">
-        <p className="m-0"><strong>Gordo</strong></p>
-        <p className="mb-0">Doggo</p>
+        <p className="m-0"><strong>Right in the feels</strong></p>
+        <p className="mb-0">Se leggi questo sei stato RickRollato</p>
          </div>
   </div>
   <div className="d-flex align-items-center my-1">
     <iframe width="80" height="60" className="rounded"
-     src="https://www.youtube.com/embed/BBGEG21CGo0?si=ZPjZtim974Noow7R" 
+    src="https://www.dailymotion.com/embed/video/xtczcf" 
      title="YouTube video player" frameborder="0" 
       allowfullscreen>
       </iframe>
