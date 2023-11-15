@@ -41,7 +41,7 @@ function Navbarl() {
   )
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 "style={{maxHeight:"50px"}} >
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 "style={{maxHeight:"70px"}} >
       <Container className='d-flex align-items-center'>
         <Navbar.Brand href="#home"><img src="assets/174857.png" alt="" width="40" height="40" /></Navbar.Brand>
         <Search className='d-inline d-lg-none'/>
@@ -89,32 +89,32 @@ function Navbarl() {
         <Nav className="me-auto mx-3">
          <Row className='align-items-center'>
             <Col >
-              <Nav.Link href="#features "> <HouseAddFill /> <br />
+              <Nav.Link style={{fontSize:"1.4rem"}} href="#features "> <HouseAddFill /> <br />
               <span className='d-none d-md-inline'>Home</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <PeopleFill /> <br />
+              <Nav.Link style={{fontSize:"1.4rem"}} href="#pricing "> <PeopleFill /> <br />
               <span className='d-none d-md-inline'>Rete</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <Briefcase /> <br />
+              <Nav.Link style={{fontSize:"1.4rem"}} href="#pricing "> <Briefcase /> <br />
               <span className='d-none d-md-inline'>Lavoro</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <ChatDots /> <br />
+              <Nav.Link style={{fontSize:"1.4rem"}} href="#pricing "> <ChatDots /> <br />
               <span className='d-none d-md-inline'>Messaggistica</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <BellFill /> <br />
+              <Nav.Link style={{fontSize:"1.4rem"}} href="#pricing "> <BellFill /> <br />
               <span className='d-none d-md-inline'>Notifiche</span></Nav.Link>
             </Col>
             <Col >
-              <Nav.Link href="#pricing "> <PersonCircle /> <br />
+              <Nav.Link style={{fontSize:"1.4rem"}} href="#pricing "> <PersonCircle /> <br />
               <span className='d-none d-md-inline'>Tu</span></Nav.Link>
             </Col>
          <Col className='border-start'>
             
-            <Nav.Link href="#pricing " onClick={() => setShowPerLeAziende(!showPerLeAziende)}>
+            <Nav.Link style={{fontSize:"1.4rem"}} href="#pricing " onClick={() => setShowPerLeAziende(!showPerLeAziende)}>
                <Grid3x3Gap/> <br />
             <span className='d-none d-md-inline text-nowrap'>Per le aziende</span></Nav.Link>
             {showPerLeAziende && (
