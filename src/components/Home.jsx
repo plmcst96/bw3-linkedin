@@ -1,10 +1,14 @@
-import { Container } from "react-bootstrap"
-import LeftSideBar from "./LeftSideBar"
+import { Col, Container, Row } from 'react-bootstrap'
+import LeftSideBar from './LeftSideBar'
+import AddPost from './AddPost'
 
 const Home = () => {
   return (
     <Container>
-      <LeftSideBar />
+      <Row className="justify-content-evenly">
+        <LeftSideBar />
+        <AddPost />
+      </Row>
     </Container>
   )
 }

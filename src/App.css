@@ -17,3 +17,17 @@
     left: 30% !important;
   }
 }
+
+.box {
+  background: none !important;
+  color: #56687a !important;
+  &:hover {
+    background: lightgrey !important;
+  }
+}
+
+.post-interation:hover {
+  background: lightgrey !important;
+  border-radius: 5px !important;
+  cursor: pointer;
+}
