@@ -1,19 +1,51 @@
-import { useState } from "react"
-import { Button, Col, Form, Modal, Row } from "react-bootstrap"
-import { Plus } from "react-bootstrap-icons"
+import { useEffect, useState } from 'react'
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
+import { Plus } from 'react-bootstrap-icons'
 
-const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
+const ModaleExperiences = ({
+  onHide,
+  show,
+  experience,
+  id,
+  selecetedExperience,
+  setSelectedExperience,
+}) => {
   const [isChecked, setChecked] = useState(false)
   const [isValid, setIsValid] = useState(false)
   const [postExperience, setPostExperience] = useState({
-    ...experience,
-    role: experience.role,
-    company: experience.company,
-    startDate: "2023-08-11",
-    endDate: "2023-10-10" || null,
-    description: experience.description,
-    area: experience.area,
+    role: '',
+    company: '',
+    startDate: '2023-08-11',
+    endDate: '2023-10-10' || null,
+    description: '',
+    area: '',
   })
+
+  useEffect(() => {
+    if (selecetedExperience) {
+      setPostExperience({
+        role: selecetedExperience.role || '',
+        company: selecetedExperience.company || '',
+        startDate: selecetedExperience.startDate || '2023-08-11',
+        endDate: selecetedExperience.endDate || '2023-10-10' || null,
+        description: selecetedExperience.description || '',
+        area: selecetedExperience.area || '',
+      })
+      setChecked(!selecetedExperience.isChecked)
+      setIsValid(!selecetedExperience.isValid)
+    } else {
+      setPostExperience({
+        role: '',
+        company: '',
+        startDate: '2023-08-11',
+        endDate: '2023-10-10' || null,
+        description: '',
+        area: '',
+      })
+      setChecked(false)
+      setIsValid(false)
+    }
+  }, [selecetedExperience])
 
   const handelCheckChange = () => {
     setIsValid(!isValid)
@@ -32,58 +64,57 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
     }))
   }
   const key =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
+    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
+
+  let urlToUse = `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`
+  if (selecetedExperience) {
+    urlToUse = `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${selecetedExperience._id}`
+  }
+  let methodToUse = 'POST'
+  if (selecetedExperience) {
+    methodToUse = 'PUT'
+  }
 
   const postExperiences = async () => {
     try {
-      const res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`,
-        {
-          method: "POST",
-          body: JSON.stringify(postExperience),
+      const res = await fetch(urlToUse, {
+        method: methodToUse,
+        body: JSON.stringify(postExperience),
+        headers: {
+          Authorization: key,
+          'Content-Type': 'application/json',
+        },
+      })
 
-          headers: {
-            Authorization: key,
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      console.log(postExperience)
       if (res.ok) {
         const data = await res.json()
         console.log(data)
+        setSelectedExperience(undefined)
         onHide()
       } else {
-        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
+        throw new Error(
+          "Qualcosa è andato storto durante il salvataggio dell'esperienza"
+        )
       }
     } catch (error) {
-      console.log("errore", error)
+      console.log('Errore', error)
     }
   }
 
-  const putExperience = async () => {
+  const deletePost = async () => {
     try {
-      const res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${idEx}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(postExperience),
-
-          headers: {
-            Authorization: key,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      const res = await fetch(urlToUse, {
+        method: 'DELETE',
+        headers: { Authorization: key },
+      })
       if (res.ok) {
-        const data = await res.json()
-        console.log(data)
+        console.log('eliminato')
         onHide()
       } else {
-        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
+        throw new Error('Qualcosa è andatao storto nella cancellazione')
       }
-    } catch (error) {
-      console.log("errore", error)
+    } catch (err) {
+      console.log('Errore', err)
     }
   }
 
@@ -96,7 +127,13 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
       centered
       scrollable={true}
     >
-      <Modal.Header closeButton onClick={onHide}>
+      <Modal.Header
+        closeButton
+        onClick={() => {
+          onHide()
+          setSelectedExperience(undefined)
+        }}
+      >
         <Modal.Title id="contained-modal-title-center">
           Aggiungi esperienza
         </Modal.Title>
@@ -104,36 +141,36 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
       <Modal.Body className="p-0">
         <div
           className="d-flex align-items-center p-3"
-          style={{ background: "#EDF3F8" }}
+          style={{ background: '#EDF3F8' }}
         >
           <div>
             <p className="fw-bold mb-0">Informa la rete</p>
-            <p style={{ fontSize: "15px" }}>
+            <p style={{ fontSize: '15px' }}>
               Attiva l’opzione per informare la tua rete delle principali
               modifiche al profilo (ad esempio un nuovo lavoro) e degli
               anniversari lavorativi. Gli aggiornamenti possono richiedere fino
-              a 2 ore. Scopri di più sulla{" "}
+              a 2 ore. Scopri di più sulla{' '}
               <strong className="text-primary">
-                {" "}
+                {' '}
                 condivisione delle modifiche del profilo
               </strong>
               .
             </p>
           </div>
           <div className="ms-3">
-            {" "}
+            {' '}
             <Form.Check // prettier-ignore
               type="switch"
               id="custom-switch"
               className="fs-2"
-              label={isChecked ? "si" : "no"}
+              label={isChecked ? 'si' : 'no'}
               onChange={handleSwitchChange}
               checked={isChecked}
             />
           </div>
         </div>
         <div className="p-3">
-          <span style={{ fontSize: "12px" }} className="text-black-50">
+          <span style={{ fontSize: '12px' }} className="text-black-50">
             *indica che è obbligatorio
           </span>
           <Form>
@@ -146,6 +183,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
                 required
                 name="role"
                 defaultValue={experience.role}
+                value={postExperience.role}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -164,7 +202,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
               </Form.Select>
             </Form.Group>
             <p>
-              Scopri di più sui{" "}
+              Scopri di più sui{' '}
               <strong className="text-primary">tipi di impiego</strong>.
             </p>
             <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -175,6 +213,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
                 placeholder="Epicode"
                 required
                 name="company"
+                value={postExperience.company}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -186,6 +225,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
                 placeholder="Esempio: Roma, Italia"
                 required
                 name="area"
+                value={postExperience.area}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -209,7 +249,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
               <span className="ms-2">Attualmente ricopro questo ruolo</span>
             </div>
             <Row>
-              <span style={{ fontSize: "14px" }} className="text-black-50 mb-1">
+              <span style={{ fontSize: '14px' }} className="text-black-50 mb-1">
                 Data di inizio*
               </span>
               <Col>
@@ -255,7 +295,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
 
             <Row>
               <span
-                style={{ fontSize: "14px" }}
+                style={{ fontSize: '14px' }}
                 className="text-black-50 mb-1 mt-4"
               >
                 Data di fine*
@@ -305,7 +345,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
                 </Form.Select>
               </Col>
             </Row>
-            <div className={isValid ? "d-none" : "d-block"}>
+            <div className={isValid ? 'd-none' : 'd-block'}>
               <div className="d-flex align-items-center mt-4">
                 <Form.Check name="group2" className="fs-3" />
                 <span className="ms-2">
@@ -327,10 +367,10 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
                 segnalazioni più pertinenti
               </Form.Text>
               <p className="mt-1">
-                Scopri di più sulle{" "}
+                Scopri di più sulle{' '}
                 <a
                   href="https://www.linkedin.com/help/linkedin/answer/a720019"
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: 'none' }}
                 >
                   <strong>opzioni relative al settore</strong>
                 </a>
@@ -345,6 +385,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
                 as="textarea"
                 rows={3}
                 name="description"
+                value={postExperience.description}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -378,7 +419,7 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
               <h5 className="fw-bold">Meida</h5>
               <p>
                 Aggiungi contenuti multimediali come immagini, documenti, siti o
-                presentazioni. Scopri di più sui{" "}
+                presentazioni. Scopri di più sui{' '}
                 <strong className="text-primary">
                   tipi di file multimediali supportati
                 </strong>
@@ -394,14 +435,36 @@ const ModaleExperiences = ({ onHide, show, experience, id, idEx }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          className="rounded-pill px-4"
-          onClick={() => {
-            postExperiences()
-          }}
-        >
-          Salva
-        </Button>
+        {selecetedExperience ? (
+          <>
+            {' '}
+            <Button
+              className="rounded-pill px-4"
+              onClick={() => {
+                postExperiences()
+              }}
+            >
+              Salva
+            </Button>{' '}
+            <Button
+              className="rounded-pill px-4"
+              onClick={() => {
+                deletePost()
+              }}
+            >
+              Elimina
+            </Button>{' '}
+          </>
+        ) : (
+          <Button
+            className="rounded-pill px-4"
+            onClick={() => {
+              postExperiences()
+            }}
+          >
+            Salva
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   )
