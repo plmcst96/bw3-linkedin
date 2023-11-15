@@ -4,14 +4,39 @@ import { PersonFillAdd } from "react-bootstrap-icons";
 const Corsi = () => {
 
   return ( <>
-  <div className="d-flex align-items-center">
-    <img src="http://www.placekitten.com/200" alt=""  width={50} className="rounded-circle m-2"/>
-    <div>
-        <p className="m-0"><strong>Nome Persona</strong></p>
-        <p className="mb-0">Nome Qualifica</p>
+  <div className="d-flex align-items-center my-1">
+    <iframe width="80" height="60" className="rounded"
+     src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=Umvkzme1zxDFbtyO" 
+     title="YouTube video player" frameborder="0" 
+      
+      allowfullscreen>
+      </iframe>
+    <div className="mx-2 text-start">
+        <p className="m-0"><strong>Premi qua</strong></p>
+        <p className="mb-0">Alza il volume</p>
          </div>
   </div>
-  <button className="btn border border-2 border-black rounded-pill "><PersonFillAdd  className="me-2 pb-1"/> Collegati</button>
+  <div className="d-flex align-items-center my-1">
+  <iframe width="80" height="60" src="https://www.youtube.com/embed/I-jdIspch8w?si=wz6rZRrETf_VBOO6" 
+  title="YouTube video player" frameborder="0" 
+
+  allowfullscreen></iframe>
+    <div className="mx-2 text-start">
+        <p className="m-0"><strong>Gordo</strong></p>
+        <p className="mb-0">Doggo</p>
+         </div>
+  </div>
+  <div className="d-flex align-items-center my-1">
+    <iframe width="80" height="60" className="rounded"
+     src="https://www.youtube.com/embed/BBGEG21CGo0?si=ZPjZtim974Noow7R" 
+     title="YouTube video player" frameborder="0" 
+      allowfullscreen>
+      </iframe>
+    <div className="mx-2 text-start">
+        <p className="m-0"><strong> How to play the saxophone</strong></p>
+        <p className="mb-0">Learn with Gandalf</p>
+         </div>
+  </div>
   </> 
   );
 };

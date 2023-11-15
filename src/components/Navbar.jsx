@@ -1,17 +1,43 @@
 import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
+import { Col, ListGroupItem, Row } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Searchlist from './Search';
-import { useState } from 'react';
+
+import { useDebugValue, useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import { BellFill, Briefcase, ChatDots, Grid3x3Gap, HouseAddFill, PeopleFill, PersonCircle, Search } from 'react-bootstrap-icons';
+
+import { BellFill, Briefcase, ChatDots, Grid3x3Gap, HouseAddFill,  PeopleFill, PersonCircle, Search } from 'react-bootstrap-icons';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link } from 'react-router-dom';
 
 function Navbarl() {
   const [searchUs,setsearchUs]=useState("")
+  const [UserData,setUserData]=useState([])
 
+  const Searchlist=()=>
+  {
+      
+       fetch("https://striveschool-api.herokuapp.com/api/profile/", {
+            headers: {
+              Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNTc0NWRkOTllZjAwMTlhMDkzM2UiLCJpYXQiOjE2OTk5NjA2NDUsImV4cCI6MTcwMTE3MDI0NX0.KD8qWCSi2X4Z56xRN9trMclgqG_Gifdc9M7JX20dqqQ",
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`err`);
+              }
+              return response.json();
+            })
+            .then((data) => setUserData(data))
+            .catch((error) => console.error( error));
+            
+            
+  }  
+  useEffect (() => {
+    Searchlist()
+  },[searchUs]
+  )
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 ">
@@ -19,12 +45,8 @@ function Navbarl() {
         <Navbar.Brand href="#home"><img src="assets/174857.png" alt="" width="40" height="40" /></Navbar.Brand>
         <Search className='d-inline d-lg-none'/>
 
-        <Form className="d-flex d-none d-lg-inline">
-            <Form.Control onSubmit={(e)=>
-                    {
-                      e.preventDefault()
-                      (Searchlist(searchUs))
-                    }}
+        <Form className="d-flex d-none d-lg-inline"onSubmit={e => e.preventDefault()} >
+            <Form.Control 
             
               type="search"
               placeholder="Search"
@@ -33,11 +55,26 @@ function Navbarl() {
               value={searchUs}
               onChange={(e)=>
                 {
-                  e.preventDefault()
                   setsearchUs(e.target.value)
+                 
                 }}
             />
-           
+          {UserData
+            .filter((user) => user.name.toLowerCase().includes(searchUs.toLowerCase()))
+            .map((user, i) => (
+              <ListGroupItem
+                key={i}
+                className={`${!searchUs ? "d-none" : "d-block"}`}
+               
+              >
+                <Link>
+                  <div className="ps-2 w-100">
+                    <span>{searchUs ? user.name : ""}</span>
+                    <span>{searchUs ? user.surname : ""}</span>
+                  </div>
+                </Link>
+              </ListGroupItem>
+            ))}
           </Form>
         <Nav className="me-auto mx-3">
          <Row className='align-items-center'>

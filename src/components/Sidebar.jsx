@@ -13,6 +13,22 @@ const Sidebar = () => {
       randomNum[i]=Math.floor(Math.random()*userData.length)
     }
 
+    // const randomNum = [];
+    // const usedNumbers = [];
+    
+    // for (let i = 0; i < 4; i++ ) {
+    //   const randomNumber = Math.floor(Math.random() * userData.length);
+    //   if (usedNumbers.includes(randomNumber)) {
+    //     i--;
+    //   } else {
+    //     randomNum[i] = randomNumber;
+    //     usedNumbers.push(randomNumber);
+        
+    //   }
+    // }
+
+    // console.log(randomNum);
+
     useEffect(() => {
         
         fetch("https://striveschool-api.herokuapp.com/api/profile/", {
@@ -76,6 +92,7 @@ const Sidebar = () => {
                 <img src="assets/174857.png" alt="linkedIn" width={20} height={20} className="me-1" />
                 <p className="m-0">LEARNING</p>
             </div>
+            <div style={{fontSize:"1rem", fontWeight:"400"}}>Aggiungi nuove competenze con questi corsi. gratuiti per 24 ore</div>
            <Corsi />
            <hr className="m-2" />
             <a href="/" className="m-2 text-decoration-none text-secondary" style={{fontWeight:"600"}}>Visualizza i miei suggerimenti</a>
