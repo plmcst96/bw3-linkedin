@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import { Col, ListGroupItem, Row } from 'react-bootstrap';
+import { Card, Col, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -40,13 +40,13 @@ function Navbarl() {
   )
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 ">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary position-sticky  top-0 z-3 "style={{maxHeight:"50px"}} >
       <Container className='d-flex align-items-center'>
         <Navbar.Brand href="#home"><img src="assets/174857.png" alt="" width="40" height="40" /></Navbar.Brand>
         <Search className='d-inline d-lg-none'/>
-
-        <Form className="d-flex d-none d-lg-inline"onSubmit={e => e.preventDefault()} >
-            <Form.Control 
+    <ListGroup className='position-relative'>
+        <Form className="d-flex d-none d-lg-inline position-relative"onSubmit={e => e.preventDefault()} >
+            <Form.Control
             
               type="search"
               placeholder="Search"
@@ -59,23 +59,26 @@ function Navbarl() {
                  
                 }}
             />
+          <div className='position-absolute w-100 '>  
           {UserData
             .filter((user) => user.name.toLowerCase().includes(searchUs.toLowerCase()))
             .map((user, i) => (
               <ListGroupItem
                 key={i}
-                className={`${!searchUs ? "d-none" : "d-block"}`}
+                className={`  ${!searchUs ? "d-none" : "d-block"}`}
                
               >
-                <Link>
-                  <div className="ps-2 w-100">
-                    <span>{searchUs ? user.name : ""}</span>
-                    <span>{searchUs ? user.surname : ""}</span>
+                <Link className='nav-link d-flex justify-content-between'>
+                  <div className="ps-2 w-100 d-flex align-items-center">
+                    <img src={user.image} alt="user" width="25px" height="25px"/>
+                    <p className='mb-0 ms-1 text-truncate'>{searchUs ? user.name : ""} {searchUs ? user.surname : ""}</p>
                   </div>
                 </Link>
               </ListGroupItem>
             ))}
+          </div>
           </Form>
+        </ListGroup>
         <Nav className="me-auto mx-3">
          <Row className='align-items-center'>
             <Col >

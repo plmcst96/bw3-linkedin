@@ -26,7 +26,7 @@ const AllUsers = () => {
   return (
     <Row className=" justify-content-center">
     {userData.map((userList) => 
-      <Col md={4} lg={2} className="mx-1 my-4">
+      <Col xs={11} md={4} lg={2} className="mx-1 my-4">
         <Card className="h-100">
         <Card.Img className="h-50" variant="top" src={userList.image} />
         <Card.Body className="d-flex flex-column justify-content-center">
