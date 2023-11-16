@@ -5,10 +5,9 @@ const Corsi = () => {
 
   return ( <>
   <div className="d-flex align-items-center my-1">
-    <iframe width="80" height="60" className="rounded"
-   src="https://www.dailymotion.com/embed/video/x3fas4j?autoplay=1"
+    <iframe width="80" height="60" className="rounded" 
+   src="https://www.dailymotion.com/embed/video/x3fas4j?"
      title="YouTube video player" frameborder="0" 
-      
       allowfullscreen>
       </iframe>
     <div className="mx-2 text-start">
@@ -17,7 +16,7 @@ const Corsi = () => {
          </div>
   </div>
   <div className="d-flex align-items-center my-1">
-  <iframe width="80" height="60" src="https://www.dailymotion.com/embed/video/x8e6baj?autoplay=1"
+  <iframe width="80" height="60" src="https://www.dailymotion.com/embed/video/x8e6baj?"
   title="YouTube video player" frameborder="0" 
 
   allowfullscreen></iframe>

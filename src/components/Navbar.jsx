@@ -6,7 +6,7 @@ import "../navbar.css"
 import { useDebugValue, useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
-import { BellFill, Briefcase, Bullseye, ChatDots, Compass, GraphUp, Grid3x3Gap, HouseAddFill,  PeopleFill, PersonCheckFill, PersonCircle, Search, X, XDiamond, Youtube } from 'react-bootstrap-icons';
+import { BellFill, Briefcase, Bullseye, ChatDots, Compass, GraphUp, Grid3x3Gap, HouseAddFill,  PeopleFill, PersonCheckFill, PersonCircle, Plus, Search, X, XDiamond, Youtube } from 'react-bootstrap-icons';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link, NavLink } from 'react-router-dom';
@@ -62,7 +62,16 @@ function Navbarl() {
             />
           <div className='position-absolute w-100  '>
           {UserData
-            .filter((user) => user.name.toLowerCase().includes(searchUs.toLowerCase()) ||  user.surname.toLowerCase().includes(searchUs.toLowerCase()) )
+           .filter((user) => {
+            return (
+              searchUs.startsWith("@") 
+              ? user.username.toLowerCase().includes(searchUs.toLowerCase().substring(1))
+              : (  
+                user.name.toLowerCase().includes(searchUs.toLowerCase()) ||
+                user.surname.toLowerCase().includes(searchUs.toLowerCase())
+              )
+            );
+          })
             .slice(0, 10)
             .map((user, i) => (
               <ListGroupItem
@@ -120,62 +129,100 @@ function Navbarl() {
             {showPerLeAziende && (
             <div style={{position:"absolute", right:"0vw", width:"20vw",height:"90vh", border:"1px black"}}
             className={` per-le-aziende-content ${ showPerLeAziende ? "play-animation" : ""  }`} >
-                <div className='rounded, z-3' style={{backgroundColor:"white",border:"2px solid black", height:"100%"}} >
+                <div className=' z-3 border' style={{backgroundColor:"white", height:"100%",borderTopLeftRadius:"20px",
+                 borderBottomLeftRadius:"20px"}} >
                 <div className='d-flex justify-content-between m-3 align-items-center'>
-                  <h2>Per le aziende</h2>
+                  <h3 className='ms-3 mt-2' style={{fontWeight:"400"}}>Per le aziende</h3>
                   <X fontSize={"2rem"} cursor={"pointer"} onClick={() => setShowPerLeAziende(!showPerLeAziende)} />
                 </div>
-                <div className='m-4 border border-3 rounded '>
+                <div className='m-4 mt-2 border border-3  ' style={{borderRadius:"20px"}}>
                 <h4 className='m-2'>Scopri altri prodoti di LinkedIn</h4>
                 <hr />
-                <div className='d-flex flex-wrap p-2'>
-                 <NavLink className="m-2 text-decoration-none" > <Youtube className=' fs-4' style={{color:"#0e76a8"}}/> <br />
+                {/* ICONE */}
+                <Container className='d-flex flex-wrap p-2'>
+                  <Row >
+                    <Col className=' col-xs-1 col-sm-6 col-md-3 '>
+                 <NavLink className="m-2 text-decoration-none" > 
+                 <Youtube className=' fs-4' style={{color:"#0e76a8"}}/>
+                  <br />
                  <p className='m-0 ' style={{fontSize:"0.8rem"}}>Learning</p>
                  </NavLink>
-                 <NavLink className="m-2 text-decoration-none" > <GraphUp className=' fs-4' style={{color:"#0e76a8"}}/> <br />
-                 <p className='m-0 ' style={{fontSize:"0.8rem"}}>Talent <br />insight</p>
+                 </Col>
+                 <Col className=' col-xs-1 col-sm-6 col-md-3 '> 
+                 <NavLink className="m-2 text-decoration-none" > 
+                 <GraphUp className=' fs-4' style={{color:"#0e76a8"}}/>
+                  <br />
+                 <p className='m-0 ' style={{fontSize:"0.8rem"}}>Talent
+                  <br />insight</p>
                  </NavLink>
-                 <NavLink className="m-2 text-decoration-none" > <Briefcase className=' fs-4' style={{color:"#0e76a8"}}/> <br />
+                 </Col>
+                 <Col className=' col-xs-1 col-sm-6 col-md-3 '> 
+                  <NavLink className="m-2 text-decoration-none" >
+                     <Briefcase className=' fs-4' style={{color:"#0e76a8"}}/>
+                      <br />
                  <p className='m-0 ' style={{fontSize:"0.8rem"}}>Pubblica <br /> un'offerta di <br />lavoro</p>
                  </NavLink>
-                 <NavLink className="m-2 text-decoration-none" > <Bullseye className=' fs-4' style={{color:"#0e76a8"}}/> <br />
+                 </Col>
+                 <Col className=' col-xs-1 col-sm-6 col-md-3 '>  
+                 <NavLink className="m-2 text-decoration-none" > 
+                 <Bullseye className=' fs-4' style={{color:"#0e76a8"}}/> <br />
                  <p className='m-0 ' style={{fontSize:"0.8rem"}}>Pubblicizza</p>
                  </NavLink>
-                 <NavLink className="m-2 text-decoration-none" > <Compass className=' fs-4' style={{color:"#0e76a8"}}/> <br />
+                 </Col>
+                 <Col className=' col-xs-1 col-sm-6 col-md-3 '> 
+                  <NavLink className="m-2 text-decoration-none" >
+                     <Compass className=' fs-4' style={{color:"#0e76a8"}}/> <br />
                  <p className='m-0 ' style={{fontSize:"0.8rem"}}>Trova lead</p>
                  </NavLink>
-                 <NavLink className="m-2 text-decoration-none" > <PeopleFill className=' fs-4' style={{color:"#0e76a8"}}/> <br />
+                 </Col>
+                 <Col className=' col-xs-1 col-sm-6 col-md-3 '> 
+                  <NavLink className="m-2 text-decoration-none" >
+                     <PeopleFill className=' fs-4' style={{color:"#0e76a8"}}/> <br />
                  <p className='m-0 ' style={{fontSize:"0.8rem"}}>Gruppi</p>
                  </NavLink>
-                 <NavLink className="m-2 text-decoration-none" > <PersonCheckFill className=' fs-4' style={{color:"#0e76a8"}}/> <br />
+                 </Col>
+                 <Col className=' col-xs-1 col-sm-6 col-md-3 '>   
+                 <NavLink className="m-2 text-decoration-none" >
+                   <PersonCheckFill className=' fs-4' style={{color:"#0e76a8"}}/> <br />
                  <p className='m-0 ' style={{fontSize:"0.8rem"}}>Marketplace <br />dei servizi</p>
                  </NavLink>
+                 </Col>
+                 </Row>
+                </Container>
+                {/* ICONE SU */}
                 </div>
-                </div>
-                <div className='m-4 border border-3 rounded '>
+                <div className='m-4 border border-3  ' style={{borderRadius:"20px"}}>
                 <h4 className='m-2'>Scopri altro per il business</h4>
                 <hr />
-                <div className='p-3'>
-                  <NavLink style={{color:"black"}} className="text-start  text-decoration-none" >
-                    <h5 className='m-0'>Assumi su linkedIn</h5>
-                    <p className='mb-3'>Trova, attrai e assumi</p>
+                <div className='py-3'>
+                  <NavLink style={{color:"black"}} className="text-start text-decoration-none" >
+                    <h5 className='mx-4'>Assumi su linkedIn</h5>
+                    <p className='mb-3 ms-4'>Trova, attrai e assumi</p>
                   </NavLink>
-                  <NavLink style={{color:"black"}} className="text-start  text-decoration-none" >
-                    <h5 className='m-0'>Assumi su linkedIn</h5>
-                    <p className='mb-3'>Trova, attrai e assumi</p>
+                  <NavLink style={{color:"black"}} className="text-start   text-decoration-none" >
+                    <h5 className='mx-4'>Vendi con LinkedIn</h5>
+                    <p className='mb-3 ms-4'>Costruisci relazioni con i buyer</p>
                   </NavLink>
-                  <NavLink style={{color:"black"}} className="text-start  text-decoration-none" >
-                    <h5 className='m-0'>Assumi su linkedIn</h5>
-                    <p className='mb-3'>Trova, attrai e assumi</p>
+                  <NavLink style={{color:"black"}} className="text-start   text-decoration-none" >
+                    <h5 className='mx-4'>Offerta di lavoro gratuita</h5>
+                    <p className='mb-3 ms-4'>Trova candidati di qualità</p>
                   </NavLink>
-                  <NavLink style={{color:"black"}} className="text-start  text-decoration-none" >
-                    <h5 className='m-0'>Assumi su linkedIn</h5>
-                    <p className='mb-3'>Trova, attrai e assumi</p>
+                  <NavLink style={{color:"black"}} className="text-start   text-decoration-none" >
+                    <h5 className='mx-4'>Fai pubblicità su LinkedIn</h5>
+                    <p className='mb-3 ms-4'>Acquisisci clienti e fai crescere la tua azienda</p>
                   </NavLink>
-                  <NavLink style={{color:"black"}} className="text-start  text-decoration-none" >
-                    <h5 className='m-0'>Assumi su linkedIn</h5>
-                    <p className='mb-3'>Trova, attrai e assumi</p>
+                  <NavLink style={{color:"black"}} className="text-start   text-decoration-none" >
+                    <h5 className='mx-4'>Impara con LinkedIn</h5>
+                    <p className='mb-3 ms-4'>Corsi per fornare i tuoi dipendenti</p>
                   </NavLink>
+                  <NavLink style={{color:"black"}} className="text-start   text-decoration-none" >
+                    <h5 className='mx-4'>Centro amministrazione</h5>
+                    <p className='mb-3 ms-4'>Gestisci i dettagli di fatturazione e account</p>
+                  </NavLink>
+                  <hr />
+                  <NavLink style={{color:"black"}} className="text-start   text-decoration-none " >
+                    <h5 className=' ms-4 d-flex  align-items-center'>Crea una pagina aziendale<Plus className='ms-2'/> </h5>
+                  </NavLink> 
                 </div>
                 </div>
 
