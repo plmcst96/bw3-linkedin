@@ -1,0 +1,11 @@
+.addJob:hover {
+    background-color: #0e76a8;
+    color: white;
+    border: 2px solid rgb(255, 255, 255);
+}
+.addJob {
+    border: 2px solid rgb(0, 0, 0);
+}
+#card {
+    background-color: rgba(0, 0, 0, 0.05);
+}
