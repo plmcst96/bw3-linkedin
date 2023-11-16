@@ -1,6 +1,7 @@
 export const GET_USER = 'GET_USER'
 export const GET_POSTS = 'GET_POSTS'
 export const SET_POST = 'SET_POST'
+export const SET_POST_IMAGE = 'SET_POST_IMAGE'
 
 const key =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
@@ -88,7 +89,7 @@ export const getPosts = () => {
   }
 }
 
-export const setPost = (onHide, personalPost) => {
+export const setPost = (onHide, personalPost, image) => {
   return async (dispatch) => {
     try {
       const res = await fetch(
@@ -108,6 +109,45 @@ export const setPost = (onHide, personalPost) => {
           type: SET_POST,
           payload: data,
         })
+        if (image) {
+          console.log('entro qua?')
+          let formData = new FormData()
+          formData.append('post', image)
+          dispatch(setPostImage(onHide, data, formData))
+        } else {
+          dispatch(getPosts())
+          onHide()
+        }
+      } else {
+        throw new Error('Errore nel postare articolo')
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+}
+
+export const setPostImage = (onHide, personalPost, formData) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${personalPost._id}`,
+        {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Authorization: key,
+            Accept: 'application/json',
+          },
+        }
+      )
+      if (res.ok) {
+        const data = await res.json()
+        dispatch({
+          type: SET_POST_IMAGE,
+          payload: data,
+        })
+        dispatch(getPosts())
         onHide()
       } else {
         throw new Error('Errore nel postare articolo')

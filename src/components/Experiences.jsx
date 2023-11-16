@@ -38,7 +38,8 @@ const Experiences = () => {
         const data = await res.json()
         // console.log("mio", data);
         setExperience(data)
-        console.log(data)
+
+        console.log('blablabla', data)
       } else {
         throw new Error('Sei un ladro non puoi entrare nel mio profilo!')
       }
@@ -99,7 +100,7 @@ const Experiences = () => {
                   <img
                     src={ex.image ? ex.image : logo}
                     alt="immagine azienda"
-                    style={{ width: '60px', height: '60px' }}
+                    style={{ width: '60px', height: '60px', cursor: 'pointer' }}
                     onClick={() => handelExperienceImgClick(ex)}
                   />
                 </div>

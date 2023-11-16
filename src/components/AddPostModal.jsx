@@ -11,6 +11,7 @@ import {
   SET_POST_IMAGE,
   getPosts,
   setPost,
+  setPostImage,
   // setPostImage,
 } from '../redux/action'
 import { useEffect, useState } from 'react'
@@ -19,22 +20,23 @@ const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
   const user = useSelector((state) => state.user.userMe)
   const dispatch = useDispatch()
 
-  // const [image, setImage] = useState(null)
-
+  const [image, setImage] = useState(null)
   const [showInput, setShowInput] = useState(false)
-  const [text, setText] = useState('')
 
-  let formData = new FormData()
-  // formData.append('post', image, image.name)
-  formData.append('text', text)
+  const [text, setText] = useState('')
 
   const handleInputChange = (e) => {
     const { value } = e.target
     setText(value)
   }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    setImage(file)
+  }
+
   const handlePublish = () => {
     const postData = { text }
-    dispatch(setPost(onHide, postData))
+    dispatch(setPost(onHide, postData, image))
   }
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
     } else {
       setText('')
     }
-    // setImage(image)
+    setImage(null)
   }, [selectedPost])
 
   const key =
@@ -65,8 +67,16 @@ const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
       if (res.ok) {
         const data = await res.json()
         setSelectedPost(undefined)
-        dispatch(getPosts())
-        onHide()
+        //
+        if (image) {
+          console.log('entro qua?')
+          let formData = new FormData()
+          formData.append('post', image)
+          dispatch(setPostImage(onHide, data, formData))
+        } else {
+          dispatch(getPosts())
+          onHide()
+        }
       } else {
         throw new Error('Errore nel postare articolo')
       }
@@ -124,7 +134,7 @@ const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
                 <Form.Control
                   type="file"
                   accept="image/*"
-                  // onChange={(e) => setImage(e.target.files[0])}
+                  onChange={handleImageChange}
                 />
               )}
               <Image className="mb-1" />
