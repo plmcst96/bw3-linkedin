@@ -1,11 +1,11 @@
-import { Dropdown } from "react-bootstrap"
-import { QuestionCircleFill, ShieldShaded, Gear } from "react-bootstrap-icons"
+import { Dropdown } from 'react-bootstrap'
+import { QuestionCircleFill, ShieldShaded, Gear } from 'react-bootstrap-icons'
 
 const Footer = () => {
   return (
     <div
-      className="bg-white  text-center d-none d-lg-flex align-items-center justify-content-center p-3 "
-      style={{ fontSize: "14px" }}
+      className="bg-white  text-center d-none d-lg-flex align-items-center justify-content-center p-3 mt-5"
+      style={{ fontSize: '14px' }}
     >
       <div className="d-flex">
         <div className=" mx-2">
@@ -52,7 +52,7 @@ const Footer = () => {
             className=" d-block p-2 text-start text-decoration-none text-dark"
             href="./"
           >
-            Carriera{" "}
+            Carriera{' '}
           </a>
           <a
             className=" d-block p-2 text-start text-decoration-none text-dark"
@@ -96,22 +96,22 @@ const Footer = () => {
         </div>
         <div className=" mx-2 d-flex flex-column ">
           <div className="d-flex justify-content-start">
-            <QuestionCircleFill className="fs-3" />{" "}
+            <QuestionCircleFill className="fs-3" />{' '}
             <div>
-              {" "}
+              {' '}
               <a
                 className=" d-block p-2 text-start f text-decoration-none text-dark"
                 href="./"
               >
                 <strong>Domande?</strong> <br />
-                Visita il nostro Centro assistenza.{" "}
+                Visita il nostro Centro assistenza.{' '}
               </a>
             </div>
           </div>
           <div className="d-flex text-start">
-            <Gear className="fs-3" />{" "}
+            <Gear className="fs-3" />{' '}
             <div>
-              {" "}
+              {' '}
               <a
                 className=" d-block p-2 text-start f text-decoration-none text-dark"
                 href="./"
@@ -119,20 +119,20 @@ const Footer = () => {
                 <strong>
                   Gestisci il tuo account e <br />
                   la tua privacy
-                </strong>{" "}
+                </strong>{' '}
                 <br />
-                Vai alle impostazioni{" "}
+                Vai alle impostazioni{' '}
               </a>
             </div>
           </div>
           <div className="d-flex text-start">
-            <ShieldShaded className="fs-3" />{" "}
+            <ShieldShaded className="fs-3" />{' '}
             <div>
               <a
                 className=" d-block p-2 text-start f text-decoration-none text-dark"
                 href="./"
               >
-                <strong>Trasparenza sui contenuti consigliati</strong> <br />{" "}
+                <strong>Trasparenza sui contenuti consigliati</strong> <br />{' '}
                 Scopri di più sui contenuti consigliati.
               </a>
             </div>
@@ -140,10 +140,10 @@ const Footer = () => {
         </div>
         <Dropdown
           className="border border-dark border-1"
-          style={{ height: "fit-content" }}
+          style={{ height: 'fit-content' }}
         >
           <Dropdown.Toggle variant="white" id="dropdown-basic">
-            <span style={{ fontSize: "14px" }}>Selezione Lingua </span>
+            <span style={{ fontSize: '14px' }}>Selezione Lingua </span>
           </Dropdown.Toggle>
 
           <Dropdown.Menu>

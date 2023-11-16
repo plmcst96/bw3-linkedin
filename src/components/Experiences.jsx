@@ -1,17 +1,17 @@
-import { Col, Row, Dropdown } from "react-bootstrap"
+import { Col, Row, Dropdown } from 'react-bootstrap'
 import {
   BriefcaseFill,
   CalendarDate,
   PencilFill,
   Plus,
-} from "react-bootstrap-icons"
+} from 'react-bootstrap-icons'
 
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import ModaleExperiences from "./ModaleExperiences"
-import { format } from "date-fns"
-import ImageExperience from "./ImageExperience"
-import logo from "../assets/experience.png"
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import ModaleExperiences from './ModaleExperiences'
+import { format } from 'date-fns'
+import ImageExperience from './ImageExperience'
+import logo from '../assets/experience.png'
 
 const Experiences = () => {
   const [experience, setExperience] = useState([])
@@ -21,7 +21,7 @@ const Experiences = () => {
   const [selecetedExperience, setSelectedExperience] = useState()
 
   const key =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
+    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
 
   const getExperiences = async () => {
     try {
@@ -40,10 +40,10 @@ const Experiences = () => {
         setExperience(data)
         console.log(data)
       } else {
-        throw new Error("Sei un ladro non puoi entrare nel mio profilo!")
+        throw new Error('Sei un ladro non puoi entrare nel mio profilo!')
       }
     } catch (error) {
-      console.log("errore", error)
+      console.log('errore', error)
     }
   }
 
@@ -65,8 +65,8 @@ const Experiences = () => {
   }
 
   return (
-    <Row>
-      <Col xs={12} sm={11} md={8} className="rounded border mt-3 px-3 py-4">
+    <>
+      <Col className="rounded border mt-3 px-3 py-4">
         <Row>
           <Col className="d-flex justify-content-between align-items-center h-25">
             <h5 className="fw-bold">Esperienze</h5>
@@ -81,7 +81,7 @@ const Experiences = () => {
                     href="#/action-1"
                     onClick={() => setModalShow(true)}
                   >
-                    <BriefcaseFill /> Aggiungi posizione lavorativa{" "}
+                    <BriefcaseFill /> Aggiungi posizione lavorativa{' '}
                   </Dropdown.Item>
                   <Dropdown.Item href="#/action-2">
                     <CalendarDate /> Aggiungi pausa lavorativa
@@ -99,7 +99,7 @@ const Experiences = () => {
                   <img
                     src={ex.image ? ex.image : logo}
                     alt="immagine azienda"
-                    style={{ width: "60px", height: "60px" }}
+                    style={{ width: '60px', height: '60px' }}
                     onClick={() => handelExperienceImgClick(ex)}
                   />
                 </div>
@@ -107,8 +107,8 @@ const Experiences = () => {
                   <p className="fw-bold m-0">{ex.role}</p>
                   <p className="m-0">{ex.company}</p>
                   <p className="m-0 text-black-50">
-                    {format(new Date(ex.startDate), "yyyy/MM/dd")} |{" "}
-                    {format(new Date(ex.endDate), "yyyy/MM/dd")}
+                    {format(new Date(ex.startDate), 'yyyy/MM/dd')} |{' '}
+                    {format(new Date(ex.endDate), 'yyyy/MM/dd')}
                   </p>
                   <p className="m-0 text-black-50">{ex.area}</p>
                   <p className="m-0">{ex.description}</p>
@@ -141,7 +141,7 @@ const Experiences = () => {
         selecetedExperience={selecetedExperience}
         id={user._id}
       />
-    </Row>
+    </>
   )
 }
 
