@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import { Button, Col, Dropdown, Row } from 'react-bootstrap'
-import { ArrowRight, PencilFill, Plus, Trash3Fill } from 'react-bootstrap-icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPosts } from '../redux/action'
-import AddPostModal from './AddPostModal'
+import { useEffect, useState } from "react"
+import { Button, Col, Dropdown, Row } from "react-bootstrap"
+import { ArrowRight, PencilFill, Plus, Trash3Fill } from "react-bootstrap-icons"
+import { useDispatch, useSelector } from "react-redux"
+import { getPosts } from "../redux/action"
+import AddPostModal from "./AddPostModal"
+import img from "../assets/img1.png"
 
 const Activity = () => {
   const myPosts = useSelector((state) => state.post.post)
@@ -29,14 +30,14 @@ const Activity = () => {
   }, [])
 
   const key =
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
 
   const deletePost = async (id) => {
     try {
       const res = await fetch(
         `https://striveschool-api.herokuapp.com/api/posts/${id}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
             Authorization: key,
           },
@@ -47,10 +48,10 @@ const Activity = () => {
         console.log(data)
         dispatch(getPosts())
       } else {
-        throw new Error('Ri-eccoci non impari mai!')
+        throw new Error("Ri-eccoci non impari mai!")
       }
     } catch (error) {
-      console.log('errore', error)
+      console.log("errore", error)
     }
   }
 
@@ -75,22 +76,27 @@ const Activity = () => {
               .map((myPost) => (
                 <>
                   {myId === myPost.user._id ? (
-                    <Col className="mt-3 d-flex justify-content-between">
-                      <div>
+                    <Col className="mt-3 d-flex justify-content-between align-items-start">
+                      <img
+                        src={myPost.image ? myPost.image : img}
+                        alt=""
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                      <div style={{ maxWidth: "341px" }}>
                         <p
                           className="m-0 text-black-50"
-                          style={{ fontSize: '14px' }}
+                          style={{ fontSize: "14px" }}
                         >
                           <span className="fw-bold">
                             {myPost.user.name
                               ? myPost.user.name
-                              : myPost.username}{' '}
-                            {myPost.user.surname ? myPost.user.surname : ''}
-                          </span>{' '}
+                              : myPost.username}{" "}
+                            {myPost.user.surname ? myPost.user.surname : ""}
+                          </span>{" "}
                           <span>ha pubblicato questo post - ora</span>
                         </p>
                         <div>
-                          <p style={{ fontSize: '14px' }}>{myPost.text}</p>
+                          <p style={{ fontSize: "14px" }}>{myPost.text}</p>
                         </div>
                       </div>
                       <div className="d-flex align-items-center">
@@ -117,7 +123,7 @@ const Activity = () => {
                       </div>
                     </Col>
                   ) : (
-                    ''
+                    ""
                   )}
                 </>
               ))
@@ -127,7 +133,7 @@ const Activity = () => {
           </Row>
           <Button
             className="bg-white fw-bold text-secondary rounded-0 mt-2"
-            style={{ border: 'none', borderTop: 'solid 1px lightgrey' }}
+            style={{ border: "none", borderTop: "solid 1px lightgrey" }}
           >
             Mostra tutte le attività <ArrowRight />
           </Button>

@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap'
+import { useState } from "react"
+import { Button, Form, Modal } from "react-bootstrap"
+import img from "../assets/experience.png"
 
 const ImageExperience = ({
   onHide,
@@ -13,18 +14,18 @@ const ImageExperience = ({
 
   const postImg = async () => {
     let formData = new FormData()
-    formData.append('experience', postImage)
+    formData.append("experience", postImage)
     const key =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
     try {
       const res = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${selecetedExperience._id}/picture`,
         {
-          method: 'POST',
+          method: "POST",
           body: formData,
           headers: {
             Authorization: key,
-            Accept: 'application/json',
+            Accept: "application/json",
           },
         }
       )
@@ -36,14 +37,14 @@ const ImageExperience = ({
         onHide()
         window.location.reload()
       } else {
-        throw new Error('Non puoi rubarmi identità!')
+        throw new Error("Non puoi rubarmi identità!")
       }
     } catch (error) {
-      console.log('errore', error)
+      console.log("errore", error)
     }
   }
 
-  console.log('ecco', selecetedExperience)
+  console.log("ecco", selecetedExperience)
 
   return (
     <Modal show={show} onHide={onHide} backdrop={onHide}>
@@ -55,12 +56,12 @@ const ImageExperience = ({
           {selecetedExperience?.company}, aiuta gli altri a conoscerti!
         </h5>
         <img
-          src={selecetedExperience?.image}
+          src={selecetedExperience?.image ? selecetedExperience?.image : img}
           alt=""
-          style={{ borderRadius: '50%', width: '150px', height: '150px' }}
+          style={{ borderRadius: "50%", width: "150px", height: "150px" }}
           className="my-5"
         />
-        <p style={{ fontSize: '12px' }} className="text-center">
+        <p style={{ fontSize: "12px" }} className="text-center">
           Chiediamo agli utenti di LinkedIn di utilizzare le loro vere identità,
           quindi scatta o carica una tua foto. Poi ritagliala, applica dei
           filtri e perfezionala come vuoi.

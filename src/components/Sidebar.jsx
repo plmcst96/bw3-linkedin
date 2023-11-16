@@ -1,11 +1,15 @@
-import { Row, Col, Container } from 'react-bootstrap'
-import { Pencil } from 'react-bootstrap-icons'
-import DiscoverUser from './DiscoverUser'
-import Corsi from './Corsi'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Col } from "react-bootstrap"
+import { Pencil } from "react-bootstrap-icons"
+import DiscoverUser from "./DiscoverUser"
+import Corsi from "./Corsi"
+import { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { getOtherUser } from "../redux/action"
 const Sidebar = () => {
-  const [userData, setUserData] = useState([])
+  // const [userData, setUserData] = useState([])
+  const dispatch = useDispatch()
+  const userData = useSelector((state) => state.other.content)
 
   const randomNum = []
   for (let i = 0; i < 4; i++) {
@@ -13,30 +17,18 @@ const Sidebar = () => {
   }
 
   useEffect(() => {
-    fetch('https://striveschool-api.herokuapp.com/api/profile/', {
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNTc0NWRkOTllZjAwMTlhMDkzM2UiLCJpYXQiOjE2OTk5NjA2NDUsImV4cCI6MTcwMTE3MDI0NX0.KD8qWCSi2X4Z56xRN9trMclgqG_Gifdc9M7JX20dqqQ',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`err`)
-        }
-        return response.json()
-      })
-      .then((data) => setUserData(data))
-      .catch((error) => console.error(error))
+    dispatch(getOtherUser())
   }, [])
+
   return (
     <Col className="d-none d-lg-block">
       <div className="rounded border  mb-2 p-1">
         <div className="d-flex justify-content-between  p-3">
           <div className=" text-start me-2">
-            <p style={{ fontSize: '14px', fontWeight: '600', margin: '0' }}>
+            <p style={{ fontSize: "14px", fontWeight: "600", margin: "0" }}>
               Lingua del profilo
             </p>
-            <p className="m-0" style={{ fontSize: '14px' }}>
+            <p className="m-0" style={{ fontSize: "14px" }}>
               Italiano
             </p>
           </div>
@@ -45,10 +37,10 @@ const Sidebar = () => {
         <hr className="m-0" />
         <div className="d-flex justify-content-between  p-3">
           <div className=" text-start me-2">
-            <p style={{ fontSize: '14px', fontWeight: '600', margin: '0' }}>
+            <p style={{ fontSize: "14px", fontWeight: "600", margin: "0" }}>
               Public profile & URL
             </p>
-            <p className="m-0" style={{ fontSize: '14px' }}>
+            <p className="m-0" style={{ fontSize: "14px" }}>
               www.linkedin.com/in/...
             </p>
           </div>
@@ -61,7 +53,7 @@ const Sidebar = () => {
       {/* second section */}
 
       <div className="rounded border  my-2 p-1 px-2">
-        <p className="text-start m-2" style={{ fontSize: '14px' }}>
+        <p className="text-start m-2" style={{ fontSize: "14px" }}>
           Persone che potresti conoscere
         </p>
 
@@ -74,7 +66,7 @@ const Sidebar = () => {
         <Link
           to="/AllUsers"
           className="m-2 text-center nav-link text-secondary"
-          style={{ fontWeight: '600' }}
+          style={{ fontWeight: "600" }}
         >
           Mostra tutto
         </Link>
@@ -94,7 +86,7 @@ const Sidebar = () => {
         </div>
         <div
           className="text-start p-2"
-          style={{ fontSize: '14px', fontWeight: '400' }}
+          style={{ fontSize: "14px", fontWeight: "400" }}
         >
           Aggiungi nuove competenze con questi corsi. gratuiti per 24 ore
         </div>
@@ -103,7 +95,7 @@ const Sidebar = () => {
         <a
           href="/"
           className="m-2 text-decoration-none text-secondary"
-          style={{ fontWeight: '600', fontSize: '12px' }}
+          style={{ fontWeight: "600", fontSize: "12px" }}
         >
           Visualizza i miei suggerimenti
         </a>

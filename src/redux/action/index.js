@@ -1,7 +1,10 @@
+import { el } from "date-fns/locale"
+
 export const GET_USER = 'GET_USER'
 export const GET_POSTS = 'GET_POSTS'
 export const SET_POST = 'SET_POST'
 export const SET_POST_IMAGE = 'SET_POST_IMAGE'
+export const GET_OTHER_USER = 'GET_OTHER_USER'
 
 const key =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
@@ -154,6 +157,29 @@ export const setPostImage = (onHide, personalPost, formData) => {
       }
     } catch (error) {
       console.log('error', error)
+    }
+  }
+}
+
+export const getOtherUser = () => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch('https://striveschool-api.herokuapp.com/api/profile/', {
+        headers: {
+          Authorization: key,
+        }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        dispatch({
+          type: GET_OTHER_USER,
+          payload: data,
+        })
+      } else {
+        throw new Error('Ladro')
+      }
+    } catch (error) {
+      console.log('errore', error)
     }
   }
 }
