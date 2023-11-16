@@ -5,7 +5,7 @@ import RightSideBar from "./RightSideBar"
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="mt-3">
       <Row className="justify-content-between">
         <LeftSideBar />
         <AddPost />
