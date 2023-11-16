@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Button, Col, Dropdown, Row } from 'react-bootstrap'
-import { ArrowRight, PencilFill, Plus, Trash3Fill } from 'react-bootstrap-icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPosts } from '../redux/action'
-import AddPostModal from './AddPostModal'
+import { useEffect, useState } from "react"
+import { Button, Col, Dropdown, Row } from "react-bootstrap"
+import { ArrowRight, PencilFill, Plus, Trash3Fill } from "react-bootstrap-icons"
+import { useDispatch, useSelector } from "react-redux"
+import { getPosts } from "../redux/action"
+import AddPostModal from "./AddPostModal"
 
 const Activity = () => {
   const myPosts = useSelector((state) => state.post.post)
@@ -16,11 +16,44 @@ const Activity = () => {
     setModalPostShow(true)
   }
 
+  const handelDelete = (myPost) => {
+    setSelectedPost(myPost)
+    if (myPost) {
+      deletePost(myPost._id)
+    }
+  }
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getPosts())
   }, [])
-  console.log('ciaone', myPosts)
+
+  const key =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
+
+  const deletePost = async (id) => {
+    try {
+      const res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: key,
+          },
+        }
+      )
+      if (res.ok) {
+        const data = await res.text()
+        console.log(data)
+        dispatch(getPosts())
+      } else {
+        throw new Error("Ri-eccoci non impari mai!")
+      }
+    } catch (error) {
+      console.log("errore", error)
+    }
+  }
+
   return (
     <Row>
       <Col xs={12} sm={11} md={8} className="rounded border mt-3 px-3 pt-4">
@@ -49,18 +82,18 @@ const Activity = () => {
                       <div>
                         <p
                           className="m-0 text-black-50"
-                          style={{ fontSize: '14px' }}
+                          style={{ fontSize: "14px" }}
                         >
                           <span className="fw-bold">
                             {myPost.user.name
                               ? myPost.user.name
-                              : myPost.username}{' '}
-                            {myPost.user.surname ? myPost.user.surname : ''}
-                          </span>{' '}
+                              : myPost.username}{" "}
+                            {myPost.user.surname ? myPost.user.surname : ""}
+                          </span>{" "}
                           <span>ha pubblicato questo post - ora</span>
                         </p>
                         <div>
-                          <p style={{ fontSize: '14px' }}>{myPost.text}</p>
+                          <p style={{ fontSize: "14px" }}>{myPost.text}</p>
                         </div>
                       </div>
                       <div className="d-flex align-items-center">
@@ -76,15 +109,18 @@ const Activity = () => {
                             >
                               <PencilFill /> Modifica post
                             </Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">
-                              <Trash3Fill /> Elimina posta
+                            <Dropdown.Item
+                              href="#/action-2"
+                              onClick={() => handelDelete(myPost)}
+                            >
+                              <Trash3Fill /> Elimina post
                             </Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
                       </div>
                     </Col>
                   ) : (
-                    ''
+                    ""
                   )}
                 </>
               ))
@@ -94,7 +130,7 @@ const Activity = () => {
           </Row>
           <Button
             className="bg-white fw-bold text-secondary rounded-0 mt-2"
-            style={{ border: 'none', borderTop: 'solid 1px lightgrey' }}
+            style={{ border: "none", borderTop: "solid 1px lightgrey" }}
           >
             Mostra tutte le attività <ArrowRight />
           </Button>
