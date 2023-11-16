@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import Profile from './components/Profile'
@@ -5,8 +6,12 @@ import Profile from './components/Profile'
 function App() {
   return (
     <>
-      {/* <Profile /> */}
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

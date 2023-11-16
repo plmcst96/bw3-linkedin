@@ -29,3 +29,12 @@
   border-radius: 5px !important;
   cursor: pointer;
 }
+
+#postform {
+  box-shadow: none !important;
+}
+
+.post-control {
+  background: #f4f2ee !important;
+  color: rgb(97, 97, 97) !important;
+}

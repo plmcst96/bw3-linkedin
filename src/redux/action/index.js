@@ -1,5 +1,6 @@
 export const GET_USER = 'GET_USER'
 export const GET_POSTS = 'GET_POSTS'
+export const SET_POST = 'SET_POST'
 
 const key =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
@@ -80,6 +81,36 @@ export const getPosts = () => {
         })
       } else {
         throw new Error('errore nel recupero dei post')
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+}
+
+export const setPost = (onHide, personalPost) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/`,
+        {
+          method: 'POST',
+          body: JSON.stringify(personalPost),
+          headers: {
+            Authorization: key,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      if (res.ok) {
+        const data = await res.json()
+        dispatch({
+          type: SET_POST,
+          payload: data,
+        })
+        onHide()
+      } else {
+        throw new Error('Errore nel postare articolo')
       }
     } catch (error) {
       console.log('error', error)
