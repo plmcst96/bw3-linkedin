@@ -117,6 +117,7 @@ const Experiences = () => {
               <PencilFill
                 className="fs-5"
                 onClick={() => handleExperienceClick(ex)}
+                style={{ cursor: 'pointer' }}
               />
             </Col>
           ))}

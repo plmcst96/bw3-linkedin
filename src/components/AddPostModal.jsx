@@ -7,14 +7,27 @@ import {
   ThreeDots,
 } from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPost } from '../redux/action'
+import {
+  SET_POST_IMAGE,
+  getPosts,
+  setPost,
+  // setPostImage,
+} from '../redux/action'
 import { useEffect, useState } from 'react'
 
-const AddPostModal = ({ show, onHide, selectedPost }) => {
+const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
   const user = useSelector((state) => state.user.userMe)
   const dispatch = useDispatch()
 
+  // const [image, setImage] = useState(null)
+
+  const [showInput, setShowInput] = useState(false)
   const [text, setText] = useState('')
+
+  let formData = new FormData()
+  // formData.append('post', image, image.name)
+  formData.append('text', text)
+
   const handleInputChange = (e) => {
     const { value } = e.target
     setText(value)
@@ -30,6 +43,7 @@ const AddPostModal = ({ show, onHide, selectedPost }) => {
     } else {
       setText('')
     }
+    // setImage(image)
   }, [selectedPost])
 
   const key =
@@ -50,7 +64,8 @@ const AddPostModal = ({ show, onHide, selectedPost }) => {
       )
       if (res.ok) {
         const data = await res.json()
-        console.log('ccccc', data)
+        setSelectedPost(undefined)
+        dispatch(getPosts())
         onHide()
       } else {
         throw new Error('Errore nel postare articolo')
@@ -94,20 +109,42 @@ const AddPostModal = ({ show, onHide, selectedPost }) => {
               placeholder="Di cosa vorresti parlare?"
               autoFocus
               onChange={handleInputChange}
-              defaultValue={text}
+              value={text}
             />
           </Form.Group>
           <div className="mb-3">
-            <span className="fs-5 p-3 rounded-circle post-control ">
+            <span
+              className="fs-5 p-3 rounded-circle post-control"
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                setShowInput(true)
+              }}
+            >
+              {showInput && (
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  // onChange={(e) => setImage(e.target.files[0])}
+                />
+              )}
               <Image className="mb-1" />
             </span>
-            <span className="fs-5 p-3 ms-2 rounded-circle post-control ">
+            <span
+              className="fs-5 p-3 ms-2 rounded-circle post-control "
+              style={{ cursor: 'pointer' }}
+            >
               <CalendarWeek className="mb-1" />
             </span>
-            <span className="fs-5 p-3 ms-2 rounded-circle post-control ">
+            <span
+              className="fs-5 p-3 ms-2 rounded-circle post-control "
+              style={{ cursor: 'pointer' }}
+            >
               <PatchCheckFill className="mb-1" />
             </span>
-            <span className="fs-5 p-3 ms-2 rounded-circle post-control ">
+            <span
+              className="fs-5 p-3 ms-2 rounded-circle post-control "
+              style={{ cursor: 'pointer' }}
+            >
               <ThreeDots className="mb-1" />
             </span>
           </div>
@@ -122,6 +159,7 @@ const AddPostModal = ({ show, onHide, selectedPost }) => {
               className="rounded-pill"
               // disabled
               onClick={() => {
+                dispatch(getPosts())
                 handlePublish()
               }}
             >
@@ -134,6 +172,7 @@ const AddPostModal = ({ show, onHide, selectedPost }) => {
               // disabled
               onClick={() => {
                 putPost()
+                setSelectedPost(undefined)
                 console.log('clickato')
               }}
             >

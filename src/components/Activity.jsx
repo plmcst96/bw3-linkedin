@@ -69,9 +69,6 @@ const Activity = () => {
             >
               Crea un post
             </Button>
-            <span className="ms-4">
-              <PencilFill className="fs-5 " />
-            </span>
           </Col>
           <Row className="flex-column">
             {myPosts
@@ -99,7 +96,7 @@ const Activity = () => {
                       <div className="d-flex align-items-center">
                         <Dropdown align="end">
                           <Dropdown.Toggle id="dropdownMenuicon">
-                            <Plus className="fs-1 me-3 text-black" />
+                            <Plus className="fs-1 text-black" />
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu className="end">
@@ -140,6 +137,7 @@ const Activity = () => {
         show={modalPostShow}
         onHide={() => setModalPostShow(false)}
         selectedPost={selectedPost}
+        setSelectedPost={setSelectedPost}
       />
     </>
   )
