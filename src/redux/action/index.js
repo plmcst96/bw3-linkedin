@@ -3,12 +3,16 @@ export const GET_POSTS = 'GET_POSTS'
 export const SET_POST = 'SET_POST'
 export const SET_POST_IMAGE = 'SET_POST_IMAGE'
 export const GET_OTHER_USER = 'GET_OTHER_USER'
+export const GET_OTHER_PROFILE = 'GET_OTHER_PROFILE'
+
 
 //COMMENTI
 
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const DELETE_COMMENTS = 'DELETE_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const SINGLE_COMMENT_TEXT = 'SINGLE_COMMENT_TEXT'
+export const SINGLE_COMMENT_ID = 'SINGLE_COMMENT_ID'
 
 const key =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
@@ -208,6 +212,32 @@ export const getOtherUser = () => {
   }
 }
 
+export const getOtherProfile = (params) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(
+        'https://striveschool-api.herokuapp.com/api/profile/' + params.userId,
+        {
+          headers: {
+            Authorization: key,
+          },
+        }
+      )
+      if (res.ok) {
+        const data = await res.json()
+        dispatch({
+          type: GET_OTHER_PROFILE,
+          payload: data,
+        })
+      } else {
+        throw new Error('Ladro')
+      }
+    } catch (error) {
+      console.log('errore', error)
+    }
+  }
+}
+
 //COMMENTI
 
 // ESTRAZIONE COMMENTI
@@ -266,14 +296,14 @@ export const deleteComments = (id) => {
 
 //POSTARE COMMENTI
 
-export const addComment = (commentData) => {
-  return async (dispatch) => {
+export const addComment = () => {
+  return async (dispatch, getState) => {
     try {
       const res = await fetch(
         'https://striveschool-api.herokuapp.com/api/comments/',
         {
           method: 'POST',
-          body: JSON.stringify(commentData),
+          body: JSON.stringify(getState().single.content),
           headers: {
             'Content-Type': 'application/json',
             Authorization: commentKey,
@@ -293,3 +323,19 @@ export const addComment = (commentData) => {
     }
   }
 }
+
+
+export const changeCommentText = (newText) => {
+  return {
+    type: SINGLE_COMMENT_TEXT,
+    payload: newText
+  }
+}
+
+export const changeCommentId = (newId) => {
+  return {
+    type: SINGLE_COMMENT_ID,
+    payload: newId
+  }
+}
+

@@ -6,6 +6,8 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { getOtherUser } from "../redux/action"
+import logo from "../assets/logoLin.png"
+
 const Sidebar = () => {
   // const [userData, setUserData] = useState([])
   const dispatch = useDispatch()
@@ -18,6 +20,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     dispatch(getOtherUser())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -76,7 +79,7 @@ const Sidebar = () => {
       <div className="rounded border  my-2 p-1 px-2">
         <div className="d-flex p-2 align-items-center">
           <img
-            src="assets/174857.png"
+            src={logo}
             alt="linkedIn"
             width={20}
             height={20}

@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { getPosts } from "../redux/action"
 import AddPostModal from "./AddPostModal"
 import img from "../assets/img1.png"
+import { useParams } from "react-router-dom"
 
 const Activity = () => {
   const myPosts = useSelector((state) => state.post.post)
   const myId = useSelector((state) => state.user.userMe._id)
   const [modalPostShow, setModalPostShow] = useState(false)
   const [selectedPost, setSelectedPost] = useState()
+  const params = useParams()
 
   const handleOnClick = (myPost) => {
     setSelectedPost(myPost)
@@ -27,6 +29,7 @@ const Activity = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getPosts())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const key =
@@ -64,14 +67,22 @@ const Activity = () => {
             <span className="text-primary">14 follower</span>
           </Col>
           <Col className="mt-3 d-flex justify-content-end me-2">
-            <Button
-              variant="outline-primary rounded-pill"
-              onClick={() => handleOnClick()}
-            >
-              Crea un post
-            </Button>
+            {params.userId ? (
+              ""
+            ) : (
+              <>
+                {" "}
+                <Button
+                  variant="outline-primary rounded-pill"
+                  onClick={() => handleOnClick()}
+                >
+                  Crea un post
+                </Button>
+              </>
+            )}
           </Col>
           <Row className="flex-column">
+            {}
             {myPosts
               .map((myPost) => (
                 <>

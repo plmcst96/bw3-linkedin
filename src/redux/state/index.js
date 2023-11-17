@@ -4,6 +4,8 @@ import postsReducer from '../reducers/posts'
 import personalPostReducer from '../reducers/personaPost'
 import userOtherReducer from '../reducers/other'
 import commentsReducer from '../reducers/comments'
+import userProfileReducer from '../reducers/profile'
+import singleReducer from '../reducers/single'
 
 const bigReducer = combineReducers({
   user: userReducer,
@@ -11,6 +13,8 @@ const bigReducer = combineReducers({
   personaPost: personalPostReducer,
   other: userOtherReducer,
   comments: commentsReducer,
+  profile: userProfileReducer,
+  single: singleReducer
 })
 
 const store = configureStore({

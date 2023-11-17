@@ -1,20 +1,20 @@
-import { Component, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
-import { addComment } from '../redux/action'
+import { Form } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { addComment, changeCommentText } from "../redux/action"
 
 const AddComment = ({ postId }) => {
   const dispatch = useDispatch()
-  const [comments, setComments] = useState({
-    comment: '',
-    rate: 1,
-    elementId: postId,
-  })
+  const text = useSelector((state) => state.single.content.comment)
+
+  // const [comments, setComments] = useState({
+  //   comment: '',
+  //   rate: 1,
+  //   elementId: postId,
+  // })
 
   const addCommentHandler = (e) => {
     e.preventDefault()
-    dispatch(addComment({ ...comments, elementId: postId }))
-    setComments({ comment: '', rate: 1, elementId: postId })
+    dispatch(addComment({ comment: text, elementId: postId, rate: 1 }))
   }
 
   return (
@@ -25,16 +25,12 @@ const AddComment = ({ postId }) => {
           <Form.Control
             as="textarea"
             rows={2}
-            value={comments.comment}
-            autoFocus
+            value={text}
             onChange={(e) => {
-              setComments({ ...comments, comment: e.target.value })
+              dispatch(changeCommentText(e.target.value))
             }}
           />
         </Form.Group>
-        <Button type="submit" className="w-100 my-2">
-          Pubblica
-        </Button>
       </div>
     </Form>
   )
