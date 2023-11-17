@@ -113,6 +113,7 @@ const Jobs = () => {
                                   fontSize: "16px",
                                   height: "40px",
                                   maxWidth: "143px",
+                                  width: "143px",
                                 }}
                               >
                                 <Briefcase className=" pb-1" />

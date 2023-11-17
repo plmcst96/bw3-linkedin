@@ -159,7 +159,7 @@ function Navbarl() {
             </Col>
             <Col>
               {" "}
-              <Nav.Link className="text-center" href="#pricing ">
+              <Link className="text-center nav-link" to={"/Jobs"}>
                 <Briefcase className="fs-4" /> <br />
                 <span
                   style={{ fontSize: "14px" }}
@@ -167,7 +167,7 @@ function Navbarl() {
                 >
                   Lavoro
                 </span>
-              </Nav.Link>
+              </Link>
             </Col>
             <Col>
               {" "}
