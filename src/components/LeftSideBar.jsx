@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import { Col, Row } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserMe } from '../redux/action'
+import { useEffect, useState } from "react"
+import { Col, Row } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { getUserMe } from "../redux/action"
 import {
   BookmarkFill,
   CaretDownFill,
   CaretUpFill,
   Plus,
   SlashSquareFill,
-} from 'react-bootstrap-icons'
-import { Link } from 'react-router-dom'
+} from "react-bootstrap-icons"
+import { Link } from "react-router-dom"
 
 const LeftSideBar = () => {
   const userMe = useSelector((state) => state.user.userMe)
@@ -34,7 +34,7 @@ const LeftSideBar = () => {
         <Row className="flex-column">
           <Link to="/profile" className="p-0 nav-link">
             <Col
-              style={{ minHeight: '90px', maxHeight: '90px' }}
+              style={{ minHeight: "90px", maxHeight: "90px" }}
               className="bg-dark rounded-top"
             >
               <img src="" alt="" />
@@ -44,11 +44,11 @@ const LeftSideBar = () => {
                 <Col xs={12}>
                   <div
                     style={{
-                      width: '100px',
-                      height: '100px',
-                      top: '50%',
-                      left: '50%',
-                      borderRadius: '50%',
+                      width: "100px",
+                      height: "100px",
+                      top: "50%",
+                      left: "50%",
+                      borderRadius: "50%",
                     }}
                     className="position-absolute bg-white peppa"
                   >
@@ -56,12 +56,12 @@ const LeftSideBar = () => {
                       src={userMe.image}
                       alt=""
                       style={{
-                        position: 'absolute',
-                        top: '4.3%',
-                        left: '5%',
-                        borderRadius: '50%',
-                        width: '90px',
-                        height: '90px',
+                        position: "absolute",
+                        top: "4.3%",
+                        left: "5%",
+                        borderRadius: "50%",
+                        width: "90px",
+                        height: "90px",
                       }}
                     />
                   </div>
@@ -69,13 +69,13 @@ const LeftSideBar = () => {
                 <Col className="mt-5 text-center p-0">
                   <div
                     className="fw-bold text-nowrap text-center"
-                    style={{ fontSize: '15px' }}
+                    style={{ fontSize: "15px" }}
                   >
                     {userMe.name} {userMe.surname}
                   </div>
                   <div
                     className="text-nowrap text-black-50"
-                    style={{ fontSize: '14px' }}
+                    style={{ fontSize: "14px" }}
                   >
                     {userMe.title}
                   </div>
@@ -85,13 +85,13 @@ const LeftSideBar = () => {
           </Link>
           <Col
             className={`d-lg-block border-start border-end border-bottom rounded-bottom ${
-              showZone ? 'd-block' : 'd-none'
+              showZone ? "d-block" : "d-none"
             }`}
           >
             <Row className="flex-column">
               <Col
                 className="d-flex align-items-start p-3"
-                style={{ fontSize: '12px' }}
+                style={{ fontSize: "12px" }}
               >
                 <div>
                   <p className="mb-0 text-black-50">Collegamenti</p>
@@ -101,7 +101,7 @@ const LeftSideBar = () => {
               </Col>
               <Col
                 className="d-flex align-items-start p-3 flex-column border-top"
-                style={{ fontSize: '12px' }}
+                style={{ fontSize: "12px" }}
               >
                 <p className="mb-0">
                   Accedi a strumenti e informazioni in esclusiva
@@ -113,7 +113,7 @@ const LeftSideBar = () => {
               </Col>
               <Col
                 className="d-flex align-items-start p-3 flex-column border-top"
-                style={{ fontSize: '12px' }}
+                style={{ fontSize: "12px" }}
               >
                 <p className="mb-0">
                   <BookmarkFill className="me-2 text-black-50" />I miei elementi
@@ -124,8 +124,8 @@ const LeftSideBar = () => {
         </Row>
         <Row>
           <Col
-            className={` d-lg-block ${showZone ? 'd-block' : 'd-none'}`}
-            style={{ fontSize: '14px' }}
+            className={` d-lg-block ${showZone ? "d-block" : "d-none"}`}
+            style={{ fontSize: "14px" }}
           >
             <Row className="mt-3 flex-column">
               <Col className="border rounded-top p-2">
@@ -148,8 +148,7 @@ const LeftSideBar = () => {
       <Col
         xs={12}
         lg={3}
-        className="text-center mt-3 rounded-1 d-lg-none mb-2"
-        style={{ backgroundColor: 'lightgray' }}
+        className="text-center mt-3 rounded-1 d-lg-none mb-2 peppas"
       >
         {showZone ? (
           <div onClick={handleOnClick2} className="d-lg-none">

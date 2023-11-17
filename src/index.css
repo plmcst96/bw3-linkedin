@@ -4,6 +4,20 @@ body,
   min-height: 100vh;
 }
 
+.peppas:hover {
+  background-color: rgb(221, 220, 220) !important;
+  cursor: pointer;
+}
+
+.addBtn {
+  background: transparent !important;
+  color: rgb(65, 65, 65) !important;
+  border-color: rgb(160, 160, 160) !important;
+  &:hover {
+    background-color: rgb(221, 220, 220) !important;
+  }
+}
+
 /* body {
   background: #f4f2ee !important;
 } */

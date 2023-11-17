@@ -1,13 +1,13 @@
-import { Button, Col, Row } from 'react-bootstrap'
+import { Button, Col, Row } from "react-bootstrap"
 import {
   CalendarWeek,
   Image,
   LayoutTextWindowReverse,
-} from 'react-bootstrap-icons'
-import { useSelector } from 'react-redux'
-import PostsHome from './PostsHome'
-import { useState } from 'react'
-import AddPostModal from './AddPostModal'
+} from "react-bootstrap-icons"
+import { useSelector } from "react-redux"
+import PostsHome from "./PostsHome"
+import { useState } from "react"
+import AddPostModal from "./AddPostModal"
 
 const AddPost = () => {
   const profileImage = useSelector((state) => state.user.userMe)
@@ -25,11 +25,10 @@ const AddPost = () => {
                   src={profileImage.image}
                   alt="profile"
                   className="rounded-circle"
-                  style={{ width: '60px', height: '50px' }}
+                  style={{ width: "60px", height: "50px" }}
                 ></img>
                 <Button
-                  className="rounded-pill w-100 text-start mx-2"
-                  variant="outline-secondary"
+                  className="rounded-pill w-100 text-start mx-2 addBtn"
                   onClick={() => setModalPostShow(true)}
                 >
                   Avvia un post
@@ -40,21 +39,21 @@ const AddPost = () => {
           <Col className="d-flex justify-content-between">
             <Button
               className="text-start mx-2 p-1 py-3 box d-flex align-items-center"
-              style={{ border: 'none' }}
+              style={{ border: "none" }}
             >
               <Image className="text-primary me-2" />
               Contenuti multimediali
             </Button>
             <Button
               className="text-start mx-2 p-1 py-3 box d-flex align-items-center"
-              style={{ border: 'none' }}
+              style={{ border: "none" }}
             >
               <CalendarWeek color="darkgoldenrod" className=" me-2" />
               Evento
             </Button>
             <Button
               className="text-start mx-2 p-1 py-3 box d-flex align-items-center"
-              style={{ border: 'none' }}
+              style={{ border: "none" }}
             >
               <LayoutTextWindowReverse color="darkorange" className=" me-2" />
               Scrivi un articolo

@@ -24,6 +24,7 @@ const PostsHome = () => {
   const dispatch = useDispatch()
   const [showZone, setShowZone] = useState(false)
   const posts = useSelector((state) => state.post.post)
+  const [showCommentZoneForPost, setShowCommentZoneForPost] = useState(null)
 
   useEffect(() => {
     dispatch(getPosts())
@@ -117,7 +118,7 @@ const PostsHome = () => {
                     onClick={() => {
                       dispatch(getComments(post._id))
                       dispatch(changeCommentId(post._id))
-                      setShowZone(true)
+                      setShowCommentZoneForPost(post._id)
                     }}
                   >
                     <ChatDots className="me-2" />
@@ -136,7 +137,7 @@ const PostsHome = () => {
                   </div>
                 </Col>
               </Row>
-              {showZone ? (
+              {showCommentZoneForPost ? (
                 <Row className="w-100 mt-2 mx-0 p-0">
                   <Col className="py-2" style={{ fontSize: "14px" }}>
                     <CommentArea postId={post._id} />
