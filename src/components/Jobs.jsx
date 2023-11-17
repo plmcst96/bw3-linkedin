@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Col, Container, Form, ListGroup, ListGroupItem, Row } from 'react-bootstrap'
 import { Briefcase, BuildingAdd, Check, ListCheck } from 'react-bootstrap-icons'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import "../job.css"
 
 
 const Jobs = () => {
     const [jobsData, setJobsData] = useState([])
     const [searchUs, setsearchUs] = useState('')
+    const params = useParams()
     useEffect(() => {
         fetch(`https://strive-benchmark.herokuapp.com/api/jobs?search=${searchUs}`)
           .then((response) => {
@@ -16,7 +17,7 @@ const Jobs = () => {
             }
             return response.json()
           })
-          .then((data1) => setJobsData(data1))
+          .then((data1) => {setJobsData(data1); console.log(data1);})
           .catch((error) => console.error(error))
       }, [searchUs])
       if (jobsData.data && jobsData.data.length > 1) {
@@ -44,7 +45,9 @@ return ( <>
           .filter((job) => {
             return (
               job.title.toLowerCase().includes(searchUs.toLowerCase()) ||
-              job.category.toLowerCase().includes(searchUs.toLowerCase())
+              job.category.toLowerCase().includes(searchUs.toLowerCase())||
+              job.company_name.toLowerCase().includes(searchUs.toLowerCase())
+              
             );
           })
           .slice(0, 100)
@@ -72,13 +75,13 @@ return ( <>
         >
           <BuildingAdd className=" pb-1" />Apri annuncio
         </button>
-        <button 
+        <Link to={`/Company/${job.company_name}`} ><button 
           className="btn addJob rounded-pill text-nowrap text-truncate  "
           style={{ fontSize: "16px",height:"40px", maxWidth:"143px"}}
         >
           <Briefcase className=" pb-1" />
          {job.company_name}
-        </button>
+        </button></Link>
         </div>
         </div> 
        </Card.Body>
