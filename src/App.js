@@ -9,6 +9,7 @@ import Chat from './components/Chat'
 import Profiles from './components/Profiles'
 import Jobs from './components/Jobs'
 import Company from './components/Company'
+import PageNotFound from './components/NotFound'
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/AllUsers" element={<AllUsers />} />
           <Route path="/Jobs" element={<Jobs />} />
           <Route path="/Company/:companyId" element={<Company />} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
         <Chat />
       </BrowserRouter>
