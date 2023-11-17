@@ -1,5 +1,5 @@
-import svg from "../404.svg"
-import logo from "../link.png"
+import svg from "../assets/404.svg"
+import logo from "../assets/link.png"
 
 const PageNotFound = () => {
   return (
