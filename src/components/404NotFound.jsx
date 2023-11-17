@@ -1,15 +1,16 @@
-import { Col, Container, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import svg from "../404.svg"
 import logo from "../link.png"
 
-const NotFound = () => {
+const PageNotFound = () => {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <img src={logo} alt="" />
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <div className="cont-404">
+        <img src={logo} alt="" width={"150px"} style={{ marginLeft: "2em" }} />
+        <img src={svg} alt="svg" style={{ marginTop: "5em" }} />
+      </div>
+    </>
   )
 }
-export default NotFound
+
+export default PageNotFound
