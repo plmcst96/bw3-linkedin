@@ -2,8 +2,11 @@ import { Row, Col, Card, Button } from "react-bootstrap"
 import { PersonFillAdd } from "react-bootstrap-icons"
 
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 const AllUsers = () => {
   const [userData, setUserData] = useState([])
+  const me = useSelector((state) => state.user.userMe)
+  console.log("poi", me)
 
   useEffect(() => {
     fetch("https://striveschool-api.herokuapp.com/api/profile/", {
@@ -23,27 +26,31 @@ const AllUsers = () => {
   }, [])
   return (
     <Row className=" justify-content-center">
-      {userData.map((userList, i) => (
-        <Col xs={11} md={4} lg={2} className="mx-1 my-4" key={i}>
-          <Card className="h-100">
-            <Card.Img className="h-50" variant="top" src={userList.image} />
-            <Card.Body className="d-flex flex-column justify-content-center">
-              <div className="d-flex flex-column justify-content-center flex-grow-1 ">
-                <Card.Title>
-                  {userList.name} {userList.surname}{" "}
-                </Card.Title>
-                <Card.Text>{userList.title || "Web Developer"}</Card.Text>
-              </div>
-              <Button
-                variant="white"
-                className="btn border border-2 border-black rounded-pill mb-2"
-              >
-                <PersonFillAdd className="me-2 pb-1" /> Collegati
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
+      {userData.map((userList, i) =>
+        me._id === userList._id ? (
+          ""
+        ) : (
+          <Col xs={11} md={4} lg={2} className="mx-1 my-4" key={i}>
+            <Card className="h-100">
+              <Card.Img className="h-50" variant="top" src={userList.image} />
+              <Card.Body className="d-flex flex-column justify-content-center">
+                <div className="d-flex flex-column justify-content-center flex-grow-1 ">
+                  <Card.Title>
+                    {userList.name} {userList.surname}{" "}
+                  </Card.Title>
+                  <Card.Text>{userList.title || "Web Developer"}</Card.Text>
+                </div>
+                <Button
+                  variant="white"
+                  className="btn border border-2 border-black rounded-pill mb-2"
+                >
+                  <PersonFillAdd className="me-2 pb-1" /> Collegati
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        )
+      )}
     </Row>
   )
 }

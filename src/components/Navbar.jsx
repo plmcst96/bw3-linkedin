@@ -99,7 +99,10 @@ function Navbarl() {
                     key={i}
                     className={`  ${!searchUs ? "d-none" : "d-block"}`}
                   >
-                    <Link className="nav-link d-flex justify-content-between">
+                    <Link
+                      className="nav-link d-flex justify-content-between"
+                      to={`/profile/${user._id}`}
+                    >
                       <div className=" p-1 w-100 d-flex align-items-center">
                         <Search className="me-3" />
                         <p
