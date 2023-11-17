@@ -17,6 +17,7 @@ function App() {
           <Route path="/profile" element={<Profiles />} />
           <Route path="/profile/:userId" element={<Profiles />} />
           <Route path="/AllUsers" element={<AllUsers />} />
+
         </Routes>
         <Chat />
       </BrowserRouter>
