@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.fire {
+  height: 100vh;
+}
+
+.sfondo {
+  min-height: 100vh !important;
+  background-image: url("./Screenshot\ 2023-11-16\ alle\ 22.49.12.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: -100%;
+}
