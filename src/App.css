@@ -38,3 +38,11 @@
   background: #f4f2ee !important;
   color: rgb(97, 97, 97) !important;
 }
+
+.postHome:last-of-type {
+  margin-bottom: 3em;
+}
+
+.singleComment {
+  background: #f2f2f2 !important;
+}

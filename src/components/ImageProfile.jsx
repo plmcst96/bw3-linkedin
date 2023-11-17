@@ -1,24 +1,30 @@
-import { useState } from "react"
-import { Button, Form, Modal } from "react-bootstrap"
+import { useEffect, useRef, useState } from 'react'
+import { Button, Form, Modal } from 'react-bootstrap'
 
 const ImageProfile = ({ onHide, show, profile }) => {
   const [postImage, setPostImage] = useState()
   const [showInput, setShowInput] = useState(false)
+  const fileInputRef = useRef(null)
+  useEffect(() => {
+    if (showInput && fileInputRef.current) {
+      fileInputRef.current.click()
+    }
+  }, [showInput])
 
   const postImg = async () => {
     let formData = new FormData()
-    formData.append("profile", postImage)
+    formData.append('profile', postImage)
     const key =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws"
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
     try {
       const res = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`,
         {
-          method: "POST",
+          method: 'POST',
           body: formData,
           headers: {
             Authorization: key,
-            Accept: "application/json",
+            Accept: 'application/json',
           },
         }
       )
@@ -30,10 +36,10 @@ const ImageProfile = ({ onHide, show, profile }) => {
         onHide()
         window.location.reload()
       } else {
-        throw new Error("Non puoi rubarmi identità!")
+        throw new Error('Non puoi rubarmi identità!')
       }
     } catch (error) {
-      console.log("errore", error)
+      console.log('errore', error)
     }
   }
 
@@ -49,20 +55,24 @@ const ImageProfile = ({ onHide, show, profile }) => {
         <img
           src={profile.image}
           alt=""
-          style={{ borderRadius: "50%", width: "150px", height: "150px" }}
+          style={{ borderRadius: '50%', width: '150px', height: '150px' }}
           className="my-5"
         />
-        <p style={{ fontSize: "12px" }} className="text-center">
+        <p style={{ fontSize: '12px' }} className="text-center">
           Chiediamo agli utenti di LinkedIn di utilizzare le loro vere identità,
           quindi scatta o carica una tua foto. Poi ritagliala, applica dei
           filtri e perfezionala come vuoi.
         </p>
         {showInput && (
-          <Form.Control
-            type="file"
-            accept="image/*"
-            onChange={(e) => setPostImage(e.target.files[0])}
-          />
+          <>
+            <Form.Control
+              type="file"
+              accept="image/*"
+              onChange={(e) => setPostImage(e.target.files[0])}
+              ref={fileInputRef}
+              className="visually-hidden"
+            />
+          </>
         )}
       </Modal.Body>
 

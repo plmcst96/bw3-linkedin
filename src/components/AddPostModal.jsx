@@ -14,12 +14,12 @@ import {
   setPostImage,
   // setPostImage,
 } from '../redux/action'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
   const user = useSelector((state) => state.user.userMe)
   const dispatch = useDispatch()
-
+  const fileInputRef = useRef(null)
   const [image, setImage] = useState(null)
   const [showInput, setShowInput] = useState(false)
 
@@ -37,6 +37,11 @@ const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
   const handlePublish = () => {
     const postData = { text }
     dispatch(setPost(onHide, postData, image))
+  }
+
+  const handleImageClick = () => {
+    // Attiva manualmente l'input del file
+    fileInputRef.current.click()
   }
 
   useEffect(() => {
@@ -123,22 +128,25 @@ const AddPostModal = ({ show, onHide, selectedPost, setSelectedPost }) => {
             />
           </Form.Group>
           <div className="mb-3">
-            <span
-              className="fs-5 p-3 rounded-circle post-control"
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                setShowInput(true)
-              }}
-            >
-              {showInput && (
+            {!image && (
+              <>
+                <span
+                  className="fs-5 p-3 rounded-circle post-control"
+                  style={{ cursor: 'pointer' }}
+                  onClick={handleImageClick}
+                >
+                  <Image className="mb-1" />
+                </span>
+                {/* Input del file nascosto */}
                 <Form.Control
+                  ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
+                  className="visually-hidden"
                 />
-              )}
-              <Image className="mb-1" />
-            </span>
+              </>
+            )}
             <span
               className="fs-5 p-3 ms-2 rounded-circle post-control "
               style={{ cursor: 'pointer' }}
