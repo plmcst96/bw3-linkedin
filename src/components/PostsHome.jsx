@@ -22,7 +22,7 @@ import { Link } from "react-router-dom"
 
 const PostsHome = () => {
   const dispatch = useDispatch()
-  const [showZone, setShowZone] = useState(false)
+
   const posts = useSelector((state) => state.post.post)
   const [showCommentZoneForPost, setShowCommentZoneForPost] = useState(null)
 
