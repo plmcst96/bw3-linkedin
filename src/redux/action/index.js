@@ -5,7 +5,6 @@ export const SET_POST_IMAGE = 'SET_POST_IMAGE'
 export const GET_OTHER_USER = 'GET_OTHER_USER'
 export const GET_OTHER_PROFILE = 'GET_OTHER_PROFILE'
 
-
 //COMMENTI
 
 export const GET_COMMENTS = 'GET_COMMENTS'
@@ -15,7 +14,7 @@ export const SINGLE_COMMENT_TEXT = 'SINGLE_COMMENT_TEXT'
 export const SINGLE_COMMENT_ID = 'SINGLE_COMMENT_ID'
 
 const key =
-  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUxZjdmM2M1NWU3ZTAwMThmODNjMTIiLCJpYXQiOjE2OTk4NzA3MDcsImV4cCI6MTcwMTA4MDMwN30.fNI0BhmrkJkjQ9j41viB-72QO6SMnWnlwEGIyAqz3Ws'
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWZkNmIyMWYwYmQ1MjAwMTkwMzI1ODEiLCJpYXQiOjE3MTExMDY4NDksImV4cCI6MTcxMjMxNjQ0OX0.US2r67FT1F8YiLvKeRVPWmZeym2lUrn3K8mPXEks8Q0'
 
 //CHIAVE COMMENTI
 
@@ -324,18 +323,16 @@ export const addComment = () => {
   }
 }
 
-
 export const changeCommentText = (newText) => {
   return {
     type: SINGLE_COMMENT_TEXT,
-    payload: newText
+    payload: newText,
   }
 }
 
 export const changeCommentId = (newId) => {
   return {
     type: SINGLE_COMMENT_ID,
-    payload: newId
+    payload: newId,
   }
 }
-
